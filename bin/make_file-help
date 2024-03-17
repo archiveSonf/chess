@@ -1,0 +1,8 @@
+#!/bin/bash
+
+grep -E '(^[a-zA-Z_-]+.*:.*?##.*$$)' Makefile |
+while read line; do
+  comand=${line%%:*}
+  com=$(echo "$line" | awk -F'##' '{print $2}' | sed 's/^[ \t]*//')
+  printf "\033[0;32m"$comand"\033[0m       $com\n"
+done
