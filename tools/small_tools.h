@@ -1,0 +1,1 @@
+void waitKeyRelease(int keycode);
