@@ -1,3 +1,3 @@
-# Othello
+# Chess
 
-Jeu de socité combinatoire abstrait opposant deux joueurs.
+chess on terminal.
