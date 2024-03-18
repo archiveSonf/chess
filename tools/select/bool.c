@@ -8,6 +8,11 @@ char* bool(char* q,char* opt1,char* opt2){
 
   waitKeyRelease(VK_RETURN);
 
+  DWORD mode;
+  HANDLE hstdin=GetStdHandle(STD_INPUT_HANDLE);
+  GetConsoleMode(hstdin,&mode);
+  SetConsoleMode(hstdin,mode & (~ENABLE_ECHO_INPUT));//stop inputs
+
   int length=strlen(opt1)+strlen(opt2);
   printf("%s: ",q);
   printf("%s%s%s ou %s",cB,opt1,fA,opt2);
