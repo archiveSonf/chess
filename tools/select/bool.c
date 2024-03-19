@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <string.h>
-#include <windows.h>
 #include "../ansi.h"
 #include "../small_tools.h"
 
@@ -19,6 +18,7 @@ char* bool(char* q,char* opt1,char* opt2){
 
   BOOL choice=TRUE, _select=FALSE;
   MSG msg;
+  
 
   while(!_select){
     BOOL keyLeft=(GetAsyncKeyState(VK_LEFT) & 0x8000),

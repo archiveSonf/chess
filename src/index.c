@@ -1,4 +1,3 @@
-#include <windows.h>
 #include "../tools/select/bool.h"
 
 void main(){
