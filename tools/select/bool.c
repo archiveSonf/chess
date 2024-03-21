@@ -3,7 +3,7 @@
 #include "../ansi.h"
 #include "../small_tools.h"
 
-char* bool(char* q,char* opt1,char* opt2){
+char bool(char q[],char opt1[],char opt2[]){
 
   waitKeyRelease(VK_RETURN);
 
