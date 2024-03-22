@@ -4,6 +4,6 @@
 
 void main(int argc, char *argv[]){
   init();
-  printf("enter -> %s\n",key_enter);
+  draw(2,1,"enter -> %d %d\n",key_enter,1);
   select_bool("Select an option","option1","option2");
 }

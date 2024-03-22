@@ -4,9 +4,12 @@
 #include "../small_tools.h"
 
 char select_bool(char opt1[],char q[],char opt2[]){
-  while(1){
+  int i=3;
+  while(i<6){
     int key=getKey();
-    printf("%d\n",key);
+    draw(i,1,"%d\n",key);
+    i++;
   }
   return 'g';
+  
 }
