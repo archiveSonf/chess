@@ -1,4 +1,6 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <stdarg.h>
 
 #ifdef __linux__
 
@@ -8,8 +10,7 @@
     initscr();
     refresh();
     endwin();
-    clear();
-    mvprintw(1,1,"Hello World\n");
+    write(1,1,"Hello World\n");
   }
 
   int getKey(){
@@ -20,6 +21,13 @@
     int key=getch();
     endwin();
     return key;
+  }
+
+  void draw(int row,int col,const char *str, ...){
+    va_list args;
+    va_start(args,str);
+    mvprintw(row,col,str,args);
+    va_end(args);
   }
 
 #else
