@@ -10,9 +10,9 @@ run: ##Run le jeu
 
 compil: $(files) ##(files=value, sys=Linux|Win32) Compile les fichiers spécifiers en un fichier éxecutables chess(wn).exe
 	if [ "$(sys)" = "Linux" ]; then \
-		gcc -o dist/chess $(files) -lncurses; \
+		gcc -o dist/chess.exe $(files) -lncurses; \
 	elif [ "$(sys)" = "Win32" ]; then\
-		gcc -o dist/chesswn $(files); \
+		gcc -o dist/chesswn.exe $(files); \
 	else \
 		printf "\033[1;33mVous n'avez pas specifie vers quel systeme d'expoitation vous voulez compiler !\033[0m\n"; \
 	fi

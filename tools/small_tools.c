@@ -1,31 +1,35 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdarg.h>
+#include "env.h"
+
+
+struct _curser_pos CurserPos={1,1};
 
 #ifdef __linux__
 
   #include <ncurses.h>
 
-  void draw(int row,int col,const char *str, ...){
+  void draw(const char *str, ...){
     va_list args;
     va_start(args,str);
 
-    move(row,col);
+    move(CurserPos.row,CurserPos.col);
     while(*str){//récupère les arguments
       if(*str=='%'){
         str++;
         if(*str=='d'){
           int val=va_arg(args,int);
-          printf("%d",val);
+          printw("%d",val);
         }else if(*str=='f'){
           char val=va_arg(args,double);
-          printf("%c",val);
+          printw("%c",val);
         }else if(*str=='s'){
           char* val=va_arg(args,char*);
-          printf("%s",val);
+          printw("%s",val);
         }
       }else{
-        printf("%c",*str);
+        printw("%c",*str);
       }
       str++;
     }
@@ -37,8 +41,7 @@
     initscr();
     refresh();
     endwin();
-    clear();
-    draw(1,1,"Hello World\n");
+    draw("Hello World\n");
   }
 
   int getKey(){
@@ -51,24 +54,17 @@
     return key;
   }
 
-  void draw(int row,int col,const char *str, ...){
-    va_list args;
-    va_start(args,str);
-    mvprintw(row,col,str,args);
-    va_end(args);
-  }
-
 #else
   
   #include <conio.h>
   #include <windows.h>
 
-  void draw(int row,int col,const char* str, ...){
+  void draw(const char* str, ...){
     va_list args;
     va_start(args,str);
     COORD coord;
-    coord.X=col;
-    coord.Y=row;
+    coord.X=CurserPos.col;
+    coord.Y=CurserPos.row;
     SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE),coord);
     
     while(*str){//récupère les arguments
@@ -95,7 +91,7 @@
 
   void init(){
     system("cls");
-    draw(1,1,"Hello World\n");
+    draw("Hello World\n");
   }
 
   int getKey(){
