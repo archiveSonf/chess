@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <string.h>
-#include "../ansi.h"
+#include "../color.h"
 #include "../small_tools.h"
 #include "../env.h"
 
@@ -8,8 +8,8 @@
 char* select_bool(char q[],char opt1[],char opt2[]){
   CurserPos.col++;
   CurserPos.row=1;
-  draw("%s : ",q);
-  draw("%s%s%s ou %s",cB,opt1,fA,opt2);
+  draw(1,"%s : ",q);
+  draw(0,"%s ou %s",cB,opt1,fA,opt2);
 
   int choice=TRUE;
   int lenght=strlen(opt1)+strlen(opt2)+4;
@@ -18,16 +18,16 @@ char* select_bool(char q[],char opt1[],char opt2[]){
     switch (input){
       case key_right:
         for(int i=0;i<lenght;i++){
-          draw("\b \b");
+          draw(0,"\b \b");
         }
-        draw("%s ou %s%s%s",opt1,cB,opt2,fA);
+        draw(0,"%s ou %s%s%s",opt1,cB,opt2,fA);
         choice=FALSE;
         break;
       case key_left:
         for(int i=0;i<lenght;i++){
-          draw("\b \b");
+          draw(0,"\b \b");
         }
-        draw("%s%s%s ou %s",cB,opt1,fA,opt2);
+        draw(0,"%s%s%s ou %s",cB,opt1,fA,opt2);
         choice=TRUE;
         break;
       default:
