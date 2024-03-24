@@ -1,6 +1,3 @@
-//fin
-//#define fA "\033[0m"
-
 //color
 
 #ifdef __linux__
@@ -25,6 +22,8 @@
 #define sW COLOR_WHITE //white
 #define sY COLOR_YELLOW //jaune
 
+void start_style(int text, int background);
+
 #else
 
 #define cBl "\033[0;30m" //noir
@@ -46,28 +45,21 @@
 #define sC "\033[0;46m" //cyan
 #define sW "\033[0;47m" //White
 
+void start_style(char text[], char background[]);
+
 struct Style{
   int active;
-  char text[10];
-  char background[10];
+  char* text;
+  char* background;
+  int blink;
 };
 
-extern Style _style={0,cW,sBl};
+extern struct Style _style;
 
 #endif
 
-//Commencer un style
-//Assurer de vous positionner à l'endroit où vous voulez que 
-//le style commence avant d'appeler cette fonction
-void start_style(char text[], char background[]);
-void start_style(int text, int background);
-
 //Faire clignoter
-//Assurer de vous positionner à l'endroit où vous voulez que 
-//le style commence avant d'appeler cette fonction
 void blink();
 
 //Finir un style
-//Assurer de vous positionner à l'endroit où vous voulez que
-//le style se termine avant d'appeler cette fonction
 void end_style();

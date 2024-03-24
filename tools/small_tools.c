@@ -2,9 +2,10 @@
 #include <stdlib.h>
 #include <stdarg.h>
 #include "env.h"
+#include "color.h"
 
 
-struct _curser_pos CurserPos={1,1};
+struct _curser_pos CurserPos={0,0};
 
 #ifdef __linux__
 
@@ -42,13 +43,13 @@ struct _curser_pos CurserPos={1,1};
 
   void init(){
     initscr();
+    start_color();
     refresh();
     endwin();
   }
 
   int getKey(){
     initscr();
-    start_color();
     noecho();
     cbreak();
     keypad(stdscr,TRUE);
@@ -72,6 +73,13 @@ struct _curser_pos CurserPos={1,1};
       coord.Y=CurserPos.row;
       SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE),coord);
     }
+
+    if(_style.active){
+      printf("%s%s",_style.background,_style.text);
+    }
+    if(_style.blink){
+      printf("\033[5m");
+    }
     
     while(*str){//récupère les arguments
       if(*str=='%'){
@@ -90,6 +98,10 @@ struct _curser_pos CurserPos={1,1};
         printf("%c",*str);
       }
       str++;
+    }
+
+    if(_style.active){
+      printf("\033[0m");
     }
 
     va_end(args);
