@@ -4,26 +4,39 @@
 #include "../small_tools.h"
 #include "../env.h"
 
-char select_bool(char q[],char opt1[],char opt2[]){
-  while(CurserPos.row<10){
-    int key=getKey();
-    draw("%d\n",key);
-    CurserPos.row++;
-    switch (key){
-      case key_left:
-        draw("gauche");
-        break;
+//Permet de proposer deux options
+char* select_bool(char q[],char opt1[],char opt2[]){
+  CurserPos.col++;
+  CurserPos.row=1;
+  draw("%s : ",q);
+  draw("%s%s%s ou %s",cB,opt1,fA,opt2);
+
+  int choice=TRUE;
+  int lenght=strlen(opt1)+strlen(opt2)+4;
+  int input=getKey();
+  while (input!=key_enter){
+    switch (input){
       case key_right:
-        draw("droite");
+        for(int i=0;i<lenght;i++){
+          draw("\b \b");
+        }
+        draw("%s ou %s%s%s",opt1,cB,opt2,fA);
+        choice=FALSE;
         break;
-      case key_up:
-        draw("haut");
+      case key_left:
+        for(int i=0;i<lenght;i++){
+          draw("\b \b");
+        }
+        draw("%s%s%s ou %s",cB,opt1,fA,opt2);
+        choice=TRUE;
         break;
-      case key_down:
-        draw("bas");
+      default:
+        input=getKey();
         break;
     }
   }
-  CurserPos.row++;
-  return 'g';
+
+  if(choice)
+    return opt1;
+  return opt2;
 }

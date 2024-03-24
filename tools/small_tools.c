@@ -10,11 +10,14 @@ struct _curser_pos CurserPos={1,1};
 
   #include <ncurses.h>
 
-  void draw(const char *str, ...){
+  void draw(int move,const char *str, ...){
     va_list args;
     va_start(args,str);
 
-    move(CurserPos.row,CurserPos.col);
+    if(move){
+      move(CurserPos.row,CurserPos.col);
+    }
+
     while(*str){//récupère les arguments
       if(*str=='%'){
         str++;
@@ -41,11 +44,11 @@ struct _curser_pos CurserPos={1,1};
     initscr();
     refresh();
     endwin();
-    draw("Hello World\n");
   }
 
   int getKey(){
     initscr();
+    start_color();
     noecho();
     cbreak();
     keypad(stdscr,TRUE);
@@ -59,13 +62,16 @@ struct _curser_pos CurserPos={1,1};
   #include <conio.h>
   #include <windows.h>
 
-  void draw(const char* str, ...){
+  void draw(int move,const char* str, ...){
     va_list args;
     va_start(args,str);
-    COORD coord;
-    coord.X=CurserPos.col;
-    coord.Y=CurserPos.row;
-    SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE),coord);
+
+    if(move){
+      COORD coord;
+      coord.X=CurserPos.col;
+      coord.Y=CurserPos.row;
+      SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE),coord);
+    }
     
     while(*str){//récupère les arguments
       if(*str=='%'){
@@ -91,7 +97,6 @@ struct _curser_pos CurserPos={1,1};
 
   void init(){
     system("cls");
-    draw("Hello World\n");
   }
 
   int getKey(){

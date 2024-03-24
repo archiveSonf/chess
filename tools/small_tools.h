@@ -29,4 +29,4 @@ void init();
 int getKey();
 
 //Permet d'afficher du texte à une position donnée
-void draw(char* str, ...);
+void draw(int move,char* str, ...);
