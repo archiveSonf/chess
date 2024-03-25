@@ -8,6 +8,6 @@ void main(){
   draw(0,"Hello World");
   char* res=select_bool("Selectionne une option","option1","option2");
   CurserPos.row++;
-  CurserPos.col=1;
+  CurserPos.col=0;
   draw(1,"Vous avez choisi %s",res);
 }
