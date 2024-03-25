@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <string.h>
-#include "../color.h"
+#include "../style.h"
 #include "../small_tools.h"
 #include "../env.h"
 

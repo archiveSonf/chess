@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <stdarg.h>
 #include "env.h"
-#include "color.h"
+#include "style.h"
 
 
 struct _curser_pos CurserPos={0,0};

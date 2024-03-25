@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "color.h"
+#include "style.h"
 
 #ifdef __linux__
 
