@@ -14,7 +14,7 @@ compil: $(files) ##(files:optionnel, sys:Linux|Win32) Compile les fichiers spéc
 	if [ "$(sys)" = "Linux" ]; then \
 		gcc -o dist/chess.exe $(files) -lncurses; \
 	elif [ "$(sys)" = "Win32" ]; then \
-		gcc -o dist/chesswn.exe _files; \
+		gcc -o dist/chesswn.exe $(files); \
 	else \
 		printf "\033[1;33mVous n'avez pas specifie vers quel systeme d'expoitation vous voulez compiler !\033[0m\n"; \
 	fi
