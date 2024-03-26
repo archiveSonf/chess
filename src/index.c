@@ -6,7 +6,9 @@
 
 void main(){
   init();
-  draw(0,"%s %s %s %s %s %s %s %s %s %s %s %s\n",roi_blanc,roi_noir,dame_blanc,dame_noir,pion_blanc,pion_noir,
+  CurserPos.row++;
+  CurserPos.col=0;
+  draw(1,"%s %s %s %s %s %s %s %s %s %s %s %s\n",roi_blanc,roi_noir,dame_blanc,dame_noir,pion_blanc,pion_noir,
     tour_blanc,tour_noir,cavalier_blanc,cavalier_noir,fou_blanc,fou_noir);
   char* res=select_bool("Sélectionne une option","option1","option2");
   CurserPos.row++;

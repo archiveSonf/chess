@@ -50,6 +50,9 @@ void draw(int move,const char *str, ...){
 
 void init(){
   printf("\033[2J\033[1;1H");
+  CurserPos.row=0;
+  CurserPos.col=0;
+  draw(1,"\nBonjour Monde !\n");
 }
 
 int getKey(){
