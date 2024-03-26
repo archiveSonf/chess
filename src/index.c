@@ -7,7 +7,7 @@
 void main(){
   init();
   draw(0,"Bonjour Monde !");
-  char* res=select_bool("S\u00E9lectionne une option","option1","option2");
+  char* res=select_bool("Sélectionne une option","option1","option2");
   CurserPos.row++;
   CurserPos.col=0;
   draw(1,"Vous avez choisi %s",res);
