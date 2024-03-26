@@ -22,5 +22,12 @@ extern struct _curser_pos CurserPos;
 #define cavalier_noir "\u265E" //♞
 #define pion_noir "\u265F" //♟
 
+//Keycode
+#define key_left 68
+#define key_right 67
+#define key_up 65
+#define key_down 66
+#define key_enter 10
+
 //Symbols divers
 #define fleche_droite "\u2771" //❱

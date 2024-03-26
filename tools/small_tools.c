@@ -1,80 +1,21 @@
 #include <stdio.h>
-#include <stdlib.h>
 #include <stdarg.h>
+#include <termios.h>
+#include <unistd.h>
 #include "env.h"
 #include "style.h"
 
-
 struct _curser_pos CurserPos={0,0};
 
-#ifdef __linux__
+void draw(int move,const char *str, ...){
+  va_list args;
+  va_start(args,str);
 
-  #include <ncurses.h>
-
-  void draw(int move,const char *str, ...){
-    va_list args;
-    va_start(args,str);
-
-    if(move){
-      move(CurserPos.row,CurserPos.col);
-    }
-
-    while(*str){//récupère les arguments
-      if(*str=='%'){
-        str++;
-        if(*str=='d'){
-          int val=va_arg(args,int);
-          printw("%d",val);
-        }else if(*str=='f'){
-          char val=va_arg(args,double);
-          printw("%c",val);
-        }else if(*str=='s'){
-          char* val=va_arg(args,char*);
-          printw("%s",val);
-        }
-      }else{
-        printw("%c",*str);
-      }
-      str++;
-    }
-
-    va_end(args);
+  if(move){
+    printf("\033[%d;%dH",CurserPos.row,CurserPos.col);
   }
 
-  void init(){
-    initscr();
-    start_color();
-    refresh();
-    endwin();
-  }
-
-  int getKey(){
-    initscr();
-    noecho();
-    cbreak();
-    keypad(stdscr,TRUE);
-    int key=getch();
-    endwin();
-    return key;
-  }
-
-#else
-  
-  #include <conio.h>
-  #include <windows.h>
-
-  void draw(int move,const char* str, ...){
-    va_list args;
-    va_start(args,str);
-
-    if(move){
-      COORD coord;
-      coord.X=CurserPos.col;
-      coord.Y=CurserPos.row;
-      SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE),coord);
-    }
-
-    if(_style.active){
+  if(_style.active){
       printf("%s%s",_style.background,_style.text);
     }
     if(_style.blink){
@@ -104,15 +45,20 @@ struct _curser_pos CurserPos={0,0};
       printf("\033[0m");
     }
 
-    va_end(args);
-  }
+  va_end(args);
+}
 
-  void init(){
-    system("cls");
-  }
+void init(){
+  printf("\033[2J\033[1;1H");
+}
 
-  int getKey(){
-    return _getch();
-  }
-
-#endif
+int getKey(){
+  static struct termios oldt, newt;
+  tcgetattr(STDIN_FILENO,&oldt);
+  newt=oldt;
+  newt.c_lflag &= (~ICANON & ~ECHO);
+  tcsetattr(STDIN_FILENO,TCSANOW,&newt);
+  int k=getchar();
+  tcsetattr(STDIN_FILENO,TCSANOW,&oldt);
+  return k;
+}

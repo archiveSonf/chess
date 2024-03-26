@@ -1,31 +1,5 @@
 //color
 
-#ifdef __linux__
-
-#include <ncurses.h>
-
-#define cBl COLOR_BLACK //noir
-#define CR COLOR_RED //rouge
-#define cG COLOR_GREEN //vert
-#define cB COLOR_BLUE //bleu
-#define cP COLOR_MAGENTA //violet
-#define cC COLOR_CYAN //cyan
-#define cW COLOR_WHITE //white
-#define cY COLOR_YELLOW //jaune
-
-#define sBl COLOR_BLACK //noir
-#define sR COLOR_RED //rouge
-#define sG COLOR_GREEN //vert
-#define sB COLOR_BLUE //bleu
-#define sP COLOR_MAGENTA //violet
-#define sC COLOR_CYAN //cyan
-#define sW COLOR_WHITE //white
-#define sY COLOR_YELLOW //jaune
-
-void start_style(int text, int background);
-
-#else
-
 #define cBl "\033[0;30m" //noir
 #define cR "\033[0;31m" //rouge
 #define cG "\033[0;32m" //vert
@@ -55,8 +29,6 @@ struct Style{
 };
 
 extern struct Style _style;
-
-#endif
 
 //Faire clignoter
 void blink();
