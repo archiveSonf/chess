@@ -1,8 +1,9 @@
 #include <stdio.h>
-#include "../tools/select/bool.h"
-#include "../tools/small_tools.h"
 #include "../tools/env.h"
-#include "../tools/select/list.h"
+#include "../tools/small_tools.h"
+#include "../tools/menu/menu.h"
+#include "../tools/menu/bool.h"
+#include "../tools/menu/list.h"
 
 void main(){
   init();
@@ -10,7 +11,7 @@ void main(){
   CurserPos.col=0;
   draw(1,"%s %s %s %s %s %s %s %s %s %s %s %s\n",roi_blanc,roi_noir,dame_blanc,dame_noir,pion_blanc,pion_noir,
     tour_blanc,tour_noir,cavalier_blanc,cavalier_noir,fou_blanc,fou_noir);
-  char* res=select_bool("Sélectionne une option","option1","option2");
+  enum options res=select_bool("Sélectionne une option",(struct option[2]){{run_game_2,"option1"},{run_game_ia,"option2"}});
   CurserPos.row++;
   CurserPos.col=0;
   draw(1,"Vous avez choisi %s",res);

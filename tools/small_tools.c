@@ -5,7 +5,7 @@
 #include "env.h"
 #include "style.h"
 
-struct _curser_pos CurserPos={0,0};
+struct _curser_pos CurserPos={1,0};
 
 void draw(int move,const char *str, ...){
   va_list args;
@@ -16,43 +16,41 @@ void draw(int move,const char *str, ...){
   }
 
   if(_style.active){
-      printf("%s%s",_style.background,_style.text);
-    }
-    if(_style.blink){
-      printf("\033[5m");
-    }
+    printf("%s%s",_style.background,_style.text);
+  }
+  if(_style.blink){
+    printf("\033[5m");
+  }
     
-    while(*str){//récupère les arguments
-      if(*str=='%'){
-        str++;
-        if(*str=='d'){
-          int val=va_arg(args,int);
-          printf("%d",val);
-        }else if(*str=='f'){
-          char val=va_arg(args,double);
-          printf("%c",val);
-        }else if(*str=='s'){
-          char* val=va_arg(args,char*);
-          printf("%s",val);
-        }
-      }else{
-        printf("%c",*str);
-      }
+  while(*str){//récupère les arguments
+    if(*str=='%'){
       str++;
+      if(*str=='d'){
+        int val=va_arg(args,int);
+        printf("%d",val);
+      }else if(*str=='f'){
+        char val=va_arg(args,double);
+        printf("%c",val);
+      }else if(*str=='s'){
+        char* val=va_arg(args,char*);
+        printf("%s",val);
+      }
+    }else{
+      printf("%c",*str);
     }
+    str++;
+  }
 
-    if(_style.active){
-      printf("\033[0m");
-    }
+  if(_style.active){
+    printf("\033[0m");
+  }
 
   va_end(args);
 }
 
 void init(){
-  printf("\033[2J\033[1;1H");
-  CurserPos.row=0;
-  CurserPos.col=0;
-  draw(1,"\nBonjour Monde !\n");
+  printf("\033[2J");
+  draw(1,"Bonjour Monde !\n");
 }
 
 int getKey(){
