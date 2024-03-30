@@ -1,6 +1,5 @@
 //Contenu Case
-#define cvb -1 //Case vide blanc
-#define cvn -2 //Case vide noir
+#define cv -1 //Case vide
 #define cpb 0 //Case pion blanc
 #define cfb 1 //Case fou blanc
 #define ccb 2 //Case cavalier blanc
