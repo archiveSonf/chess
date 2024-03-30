@@ -29,8 +29,8 @@ void draw(int move,const char *str, ...){
         int val=va_arg(args,int);
         printf("%d",val);
       }else if(*str=='f'){
-        char val=va_arg(args,double);
-        printf("%c",val);
+        double val=va_arg(args,double);
+        printf("%lf",val);
       }else if(*str=='s'){
         char* val=va_arg(args,char*);
         printf("%s",val);
