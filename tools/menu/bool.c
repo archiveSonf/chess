@@ -3,7 +3,7 @@
 #include "../style.h"
 #include "../small_tools.h"
 #include "../env.h"
-#include "bool.h"
+#include "menu.h"
 
 //Permet de proposer deux options
 enum options select_bool(char q[],struct option opts[2]){

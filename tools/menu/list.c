@@ -2,7 +2,7 @@
 #include "../env.h"
 #include "../small_tools.h"
 #include "../style.h"
-#include "list.h"
+#include "menu.h"
 
 //Permet de proposer plusieurs options
 enum options select_list(char* q,int nbr_opts,struct option opts[]){
