@@ -2,6 +2,7 @@
 #include "../tools/env.h"
 #include "../tools/small_tools.h"
 #include "../tools/menu/menu.h"
+#include "../tools/board/move.h"
 
 void main(){
   init();
@@ -20,4 +21,9 @@ void main(){
   CurserPos.row++;
   CurserPos.col=0;
   draw(1,"Vous avez choisi %d",res);
+
+  struct Move mv=doMove(blanc);
+  CurserPos.row++;
+  CurserPos.col=0;
+  draw(1,"Vous avez choisi %d %d %d %d",mv.to.x,mv.to.y,mv.from.x,mv.from.y);
 }

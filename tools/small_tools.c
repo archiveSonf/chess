@@ -16,7 +16,7 @@ void draw(int move,const char *str, ...){
   }
 
   if(_style.active){
-    printf("%s%s",_style.background,_style.text);
+    printf("%s%s",_style.text,_style.background);
   }
   if(_style.blink){
     printf("\033[5m");

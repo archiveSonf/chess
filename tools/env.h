@@ -28,6 +28,4 @@ extern struct _curser_pos CurserPos;
 #define key_up 65
 #define key_down 66
 #define key_enter 10
-
-//Symbols divers
-#define fleche_droite "\u2771" //❱
+#define backspace 127

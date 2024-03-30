@@ -10,7 +10,7 @@ enum options select_bool(char q[],struct option opts[2]){
   CurserPos.col=0;
   CurserPos.row++;
   draw(1,"%s : ",q);
-  start_style(cB,sBl);
+  start_style(cB,sans_fond);
   draw(0,"%s",opts[0].txt);
   end_style();
   draw(0," ou %s",opts[1].txt);
@@ -26,7 +26,7 @@ enum options select_bool(char q[],struct option opts[2]){
         }
         choice=0;
         draw(0,"%s ou ",opts[0].txt);
-        start_style(cB,sBl);
+        start_style(cB,sans_fond);
         draw(0,"%s",opts[1].txt);
         end_style();
         break;
@@ -35,7 +35,7 @@ enum options select_bool(char q[],struct option opts[2]){
           draw(0,"\b \b");
         }
         choice=1;
-        start_style(cB,sBl);
+        start_style(cB,sans_fond);
         draw(0,"%s",opts[0].txt);
         end_style();
         draw(0," ou %s",opts[1].txt);
