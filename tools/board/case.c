@@ -2,13 +2,10 @@
 #include "../small_tools.h"
 #include "../env.h"
 #include "../style.h"
+#include "./case.h"
 
-#ifndef longueur_case
-    #define longueur_case 3
-#endif 
-#ifndef largeur_case
-    #define largeur_case 3
-#endif 
+
+
 
 void drawpion (int num_pion, int lp, int cp, char background) {
 
