@@ -5,6 +5,9 @@
 #include "env.h"
 #include "style.h"
 #include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
 
 struct _curser_pos CurserPos={0,0,0,0};
 
@@ -35,83 +38,56 @@ void draw(int move,const char *str, ...){
   if(_style.blink){
     printf("\033[5m");
   }
-    
-  CurserPos.X+=strlen(str);
 
   //récupère les arguments
   while(*str){
-
-    if(*str=='\\'){
-      if(*(str+1)=='b'){
-        CurserPos.X-=3;
-      }
-      if(*(str+1)=='n'){
-        CurserPos.Y++;
-        CurserPos.X=0;
-      }
-      if(*(str+1)=='u'){
-        CurserPos.Y-=6;
-      }
-      //if(*(str+1)=='0'){
-      //  int i=4;
-      //  //while(*(str+i)){
-      //  //  if(*(str+i)=='m'){
-      //  //    i++;
-      //  //    break;
-      //  //  }
-      //  //}
-      //  CurserPos.X-=i;
-      //}
-    }
 
     if(*str=='%'){
       str++;
       if(*str=='d'){
         int val=va_arg(args,int);
         printf("%d",val);
-        char *_val;
-        sprintf(_val,"%d",val);
-        CurserPos.X+=strlen(_val)-2;
+        int num_digits;
+        if(val==0){
+          num_digits=1;
+        }else{
+          num_digits=floor(log10(abs(val)))+1;
+        }
+        CurserPos.X+=num_digits;
       }else if(*str=='f'){
         double val=va_arg(args,double);
         printf("%lf",val);
-        char *_val;
-        sprintf(_val,"%lf",val);
-        CurserPos.X+=strlen(_val)-3;
+        char num_digits[20];
+        sprintf(num_digits,"%lf",val);
+        CurserPos.X+=strlen(num_digits);
       }else if(*str=='s'){
         char *val=va_arg(args,char*);
-        CurserPos.X+=strlen(val)-2;
         while(*val){
-          if(*val=='\\'){
-            if(*(val+1)=='b'){
-              CurserPos.X-=3;
-            }
-            if(*(val+1)=='n'){
-              CurserPos.Y++;
-              CurserPos.X=0;
-            }
-            if(*(val+1)=='u'){
-              CurserPos.Y-=6;
-            }
-            if(*(val+1)=='0'){
-              int i=4;
-              //while(*(val+i)){
-              //  if(*(val+i)=='m'){
-              //    i++;
-              //    break;
-              //  }
-              //}
-              CurserPos.X-=i;
-            }
+          if(*val=='\b'){
+            CurserPos.X-=1;
+          }
+          if(*val=='\n'){
+            CurserPos.Y++;
+            CurserPos.X=0;
           }
           printf("%c",*val);
+          CurserPos.X++;
           val++;
         }
       }
     }else{
       printf("%c",*str);
+      CurserPos.X++;
     }
 
+    if(*str=='\b'){
+      CurserPos.X-=1;
+    }
+    if(*str=='\n'){
+      CurserPos.Y++;
+      CurserPos.X=0;
+    }
+    
     str++;
   }
 
@@ -137,4 +113,8 @@ int getKey(){
   int k=getchar();
   tcsetattr(STDIN_FILENO,TCSANOW,&oldt);
   return k;
+}
+
+void end(){
+  printf("\n\n");
 }

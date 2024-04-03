@@ -20,8 +20,8 @@
 #define sW "\033[47m" //couleur de fond White
 
 //Symbols divers
-#define select "\033[0;34m\u2771\033[0m" //❱
-#define to_from "\033[0;34m\u27AB\033[0m" //➫
+#define this "\u2771" //❱
+#define to_from "\u27AB" //➫
 
 void start_style(char text[], char background[]);
 

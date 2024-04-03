@@ -3,9 +3,9 @@ enum options{
   run_game, //Lancer une partie
   run_game_ia, //Lancer une partie contre l'ia
   run_game_2, //Lancer une partie de 2 joueurs
+  save_game, //Sauvegarder une partie
   analyz_old_game,  //Analyser les anciennes parties
   see_scores, //Voir le tableau des cores
-  save_game, //Sauvegarder une partie
   quitter, //Quitter le jeu
 };
 

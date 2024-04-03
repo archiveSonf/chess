@@ -1,5 +1,7 @@
 //Permet d'initialiser l'environnement
 void init();
+//Permet de terminer l'environnement
+void end();
 
 //Permet de récupérer la touche du clavier pressée
 int getKey();
