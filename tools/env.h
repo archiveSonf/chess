@@ -2,6 +2,8 @@
 struct _curser_pos{
   int row;
   int col;
+  int X; //Tracer la position du curseur sur la colonne
+  int Y; //Tracer la position du curseur sur la ligne
 };
 //Permet de donner la position du curseur, 
 //pour afficher y afficher du texte

@@ -16,7 +16,7 @@ enum options select_list(char* q,int nbr_opts,struct option opts[]){
   draw(0," %s\n",opts[0].txt);
   end_style();
   for(int i=1;i<nbr_opts;i++){
-    draw(0,"  %s\n",opts[i].txt);
+    draw(0,"  %s ;%d %d\n",opts[i].txt,CurserPos.X,CurserPos.Y);
   }
   CurserPos.row=first_row;
 

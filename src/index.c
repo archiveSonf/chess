@@ -15,15 +15,15 @@ void main(){
   CurserPos.col=0;
   draw(1,"Vous avez choisi %d",res);
 
-  res=select_list("S\u00E9lectionne une option",7,
+  res=select_list("Sélectionne une option",7,
     (struct option[7]){{run_game,"option1"},{run_game_ia,"option2"},{run_game_2,"option3"},{save_game,"option4"},{analyz_old_game,"option5"},{see_scores,"option6"},{quitter,"option7"}});
 
   CurserPos.row++;
   CurserPos.col=0;
   draw(1,"Vous avez choisi %d",res);
 
-  struct Move mv=doMove(blanc);
-  CurserPos.row++;
-  CurserPos.col=0;
-  draw(1,"Vous avez choisi %d %d %d %d",mv.to.x,mv.to.y,mv.from.x,mv.from.y);
+  //struct Move mv=doMove(blanc);
+  //CurserPos.row++;
+  //CurserPos.col=0;
+  //draw(1,"Vous avez choisi %d %d %d %d",mv.to.x,mv.to.y,mv.from.x,mv.from.y);
 }
