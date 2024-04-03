@@ -8,19 +8,19 @@ struct _curser_pos{
 extern struct _curser_pos CurserPos;
 
 //Chess
-#define roi_blanc "\033[6;1;5m\033[0;32m\u265A\033[0m" //♚
-#define dame_blanc "\033[6;1;5m\033[0;32m\u265B\033[0m" //♛
-#define tour_blanc "\033[6;1;5m\033[0;32m\u265C\033[0m" //♜
-#define fou_blanc "\033[6;1;5m\033[0;32m\u265D\033[0m" //♝
-#define cavalier_blanc "\033[6;1;5m\033[0;32m\u265E\033[0m" //♞
-#define pion_blanc "\033[6;1;5m\033[0;32m\u265F\033[0m" //♟
+#define roi_blanc "\033[6;1;5m\u265A" //♚
+#define dame_blanc "\033[6;1;5m\u265B" //♛
+#define tour_blanc "\033[6;1;5m\u265C" //♜
+#define fou_blanc "\033[6;1;5m\u265D" //♝
+#define cavalier_blanc "\033[6;1;5m\u265E" //♞
+#define pion_blanc "\033[6;1;5m\u265F" //♟
 
-#define roi_noir "\033[6;1;5m\033[0;35m\u265A\033[0m" //♚
-#define dame_noir "\033[6;1;5m\033[0;35m\u265B\033[0m" //♛
-#define tour_noir "\033[6;1;5m\033[0;35m\u265C\033[0m" //♜
-#define fou_noir "\033[6;1;5m\033[0;35m\u265D\033[0m" //♝
-#define cavalier_noir "\033[6;1;5m\033[0;35m\u265E\033[0m" //♞
-#define pion_noir "\033[6;1;5m\033[0;35m\u265F\033[0m" //♟
+#define roi_noir "\033[6;1;5m\u265A" //♚
+#define dame_noir "\033[6;1;5m\u265B" //♛
+#define tour_noir "\033[6;1;5m\u265C" //♜
+#define fou_noir "\033[6;1;5m\u265D" //♝
+#define cavalier_noir "\033[6;1;5m\u265E" //♞
+#define pion_noir "\033[6;1;5m\u265F" //♟
 
 //Keycode
 #define key_left 68

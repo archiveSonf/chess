@@ -4,6 +4,9 @@
 #include <unistd.h>
 #include "env.h"
 #include "style.h"
+#include <ncurses.h>
+#include <wchar.h>
+#include <stdlib.h>
 
 struct _curser_pos CurserPos={1,0};
 
@@ -49,7 +52,20 @@ void draw(int move,const char *str, ...){
 }
 
 void init(){
-  printf("\033[2J");
+  system("clear");
+  //printf("\033[2J\033[H");
+  //initscr();
+  //mvaddwch(CurserPos.row, CurserPos.col, L'♔');
+  //refresh();
+  //move(CurserPos.row, CurserPos.col);
+    // Afficher le message
+  //printw("Hello");
+  
+  //getch();
+  //endwin();
+  //(CurserPos.row, CurserPos.col, L'♔');
+  //printf("\033[2J");
+  //printf("\033[8;%d;%dt", 1, 1);
   draw(1,"Bonjour Monde !\n");
 }
 
@@ -62,4 +78,11 @@ int getKey(){
   int k=getchar();
   tcsetattr(STDIN_FILENO,TCSANOW,&oldt);
   return k;
+}
+
+
+int terminal() {
+    system("stty rows 4 cols 100"); // Redimensionne le terminal à 40 lignes et 100 colonnes
+    printf("Terminal redimensionné avec succès.\n");
+    return 0;
 }

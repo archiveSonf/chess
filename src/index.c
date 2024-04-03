@@ -22,5 +22,5 @@ void main(){
   //CurserPos.col=0;
   //draw(1,"Vous avez choisi %d",res);
 
-  drawplateau();
+  drawplateau(plateau);
 }
