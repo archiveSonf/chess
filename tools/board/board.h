@@ -16,3 +16,4 @@
 
 //Plateau de jeu
 extern int plateau[8][8];
+void drawplateau ();

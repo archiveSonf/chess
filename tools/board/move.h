@@ -14,3 +14,4 @@ enum Joueur{blanc,noir};
 
 //Effectuer un mouvement
 struct Move doMove(enum Joueur joueur);
+
