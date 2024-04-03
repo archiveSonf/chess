@@ -12,8 +12,7 @@ enum options select_list(char* q,int nbr_opts,struct option opts[]){
       last_row=first_row+nbr_opts-1;
   draw(1,"%s :\n\n", q);
   start_style(cB,sans_fond);
-  draw(0,"%s",select);
-  draw(0," %s\n",opts[0].txt);
+  draw(0,"%s %s\n",this,opts[0].txt);
   end_style();
   for(int i=1;i<nbr_opts;i++){
     draw(0,"  %s\n",opts[i].txt);
@@ -28,16 +27,14 @@ enum options select_list(char* q,int nbr_opts,struct option opts[]){
         draw(1,"  %s",opts[CurserPos.row-first_row].txt);
         CurserPos.row=(CurserPos.row==first_row)?last_row:CurserPos.row-1;
         start_style(cB,sans_fond);
-        draw(1,"%s",select);
-        draw(0," %s",opts[CurserPos.row-first_row].txt);
+        draw(1,"%s %s",this,opts[CurserPos.row-first_row].txt);
         end_style();
         break;
       case key_down:
         draw(1,"  %s",opts[CurserPos.row-first_row].txt);
         CurserPos.row=(CurserPos.row==last_row)?first_row:CurserPos.row+1;
         start_style(cB,sans_fond);
-        draw(1,"%s",select);
-        draw(0," %s",opts[CurserPos.row-first_row].txt);
+        draw(1,"%s %s",this,opts[CurserPos.row-first_row].txt);
         end_style();
         break;
     }

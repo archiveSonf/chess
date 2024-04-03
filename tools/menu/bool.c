@@ -24,7 +24,7 @@ enum options select_bool(char q[],struct option opts[2]){
         for(int i=0;i<lenght;i++){
           draw(0,"\b \b");
         }
-        choice=0;
+        choice=1;
         draw(0,"%s ou ",opts[0].txt);
         start_style(cB,sans_fond);
         draw(0,"%s",opts[1].txt);
@@ -34,7 +34,7 @@ enum options select_bool(char q[],struct option opts[2]){
         for(int i=0;i<lenght;i++){
           draw(0,"\b \b");
         }
-        choice=1;
+        choice=0;
         start_style(cB,sans_fond);
         draw(0,"%s",opts[0].txt);
         end_style();

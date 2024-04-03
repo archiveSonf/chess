@@ -4,18 +4,37 @@
 #include <unistd.h>
 #include "env.h"
 #include "style.h"
+<<<<<<< HEAD
 #include <ncurses.h>
 #include <wchar.h>
+=======
+#include <string.h>
+#include <math.h>
+>>>>>>> cbbf7c22d886ecdebe472da52fde8b5762b9a827
 #include <stdlib.h>
 
-struct _curser_pos CurserPos={1,0};
+
+struct _curser_pos CurserPos={0,0,0,0};
 
 void draw(int move,const char *str, ...){
   va_list args;
   va_start(args,str);
 
   if(move){
-    printf("\033[%d;%dH",CurserPos.row,CurserPos.col);
+    int col=CurserPos.col-CurserPos.X,
+      row=CurserPos.row-CurserPos.Y;
+    CurserPos.X=CurserPos.col;
+    CurserPos.Y=CurserPos.row;
+    if(col>0){
+      printf("\033[%dC",col);
+    }else if(col!=0){
+      printf("\033[%dD",-col);
+    }
+    if(row>0){
+      printf("\033[%dB",row);
+    }else if(row!=0){
+      printf("\033[%dA",-row);
+    }
   }
 
   if(_style.active){
@@ -24,23 +43,56 @@ void draw(int move,const char *str, ...){
   if(_style.blink){
     printf("\033[5m");
   }
-    
-  while(*str){//récupère les arguments
+
+  //récupère les arguments
+  while(*str){
+
     if(*str=='%'){
       str++;
       if(*str=='d'){
         int val=va_arg(args,int);
         printf("%d",val);
+        int num_digits;
+        if(val==0){
+          num_digits=1;
+        }else{
+          num_digits=floor(log10(abs(val)))+1;
+        }
+        CurserPos.X+=num_digits;
       }else if(*str=='f'){
         double val=va_arg(args,double);
         printf("%lf",val);
+        char num_digits[20];
+        sprintf(num_digits,"%lf",val);
+        CurserPos.X+=strlen(num_digits);
       }else if(*str=='s'){
-        char* val=va_arg(args,char*);
-        printf("%s",val);
+        char *val=va_arg(args,char*);
+        while(*val){
+          if(*val=='\b'){
+            CurserPos.X-=1;
+          }
+          if(*val=='\n'){
+            CurserPos.Y++;
+            CurserPos.X=0;
+          }
+          printf("%c",*val);
+          CurserPos.X++;
+          val++;
+        }
       }
     }else{
       printf("%c",*str);
+      CurserPos.X++;
     }
+
+    if(*str=='\b'){
+      CurserPos.X-=1;
+    }
+    if(*str=='\n'){
+      CurserPos.Y++;
+      CurserPos.X=0;
+    }
+    
     str++;
   }
 
@@ -52,6 +104,7 @@ void draw(int move,const char *str, ...){
 }
 
 void init(){
+<<<<<<< HEAD
   system("clear");
   //printf("\033[2J\033[H");
   //initscr();
@@ -67,6 +120,11 @@ void init(){
   //printf("\033[2J");
   //printf("\033[8;%d;%dt", 1, 1);
   draw(1,"Bonjour Monde !\n");
+=======
+  printf("\033[2J");
+  printf("\033[0;0H");
+  draw(1,"Bonjour Monde !");
+>>>>>>> cbbf7c22d886ecdebe472da52fde8b5762b9a827
 }
 
 int getKey(){
@@ -80,9 +138,14 @@ int getKey(){
   return k;
 }
 
+<<<<<<< HEAD
 
 int terminal() {
     system("stty rows 4 cols 100"); // Redimensionne le terminal à 40 lignes et 100 colonnes
     printf("Terminal redimensionné avec succès.\n");
     return 0;
+=======
+void end(){
+  printf("\n\n");
+>>>>>>> cbbf7c22d886ecdebe472da52fde8b5762b9a827
 }

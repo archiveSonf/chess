@@ -6,8 +6,25 @@
 
 void main(){
   init();
+  CurserPos.row++;
+  CurserPos.col=0;
+  draw(1,"%s %s %s %s %s %s\n",roi,dame,tour,fou,cavalier,pion);
+  enum options res=select_bool("Sélectionne une option",(struct option[2]){{run_game_ia,"option1"},{run_game_2,"option2"}});
+  CurserPos.row++;
+  CurserPos.col=0;
+  draw(1,"Vous avez choisi %d",res);
+
+  res=select_list("Sélectionne une option",7,
+    (struct option[7]){{run_game,"option1"},{run_game_ia,"option2"},{run_game_2,"option3"},{save_game,"option4"},{analyz_old_game,"option5"},{see_scores,"option6"},{quitter,"option7"}});
+
+  CurserPos.row++;
+  CurserPos.col=0;
+  draw(1,"Vous avez choisi %d",res);
+
+  //struct Move mv=doMove(blanc);
   //CurserPos.row++;
   //CurserPos.col=0;
+<<<<<<< HEAD
   //draw(1,"%s %s %s %s %s %s %s %s %s %s %s %s\n",roi_blanc,roi_noir,dame_blanc,dame_noir,pion_blanc,pion_noir,
   //  tour_blanc,tour_noir,cavalier_blanc,cavalier_noir,fou_blanc,fou_noir);
   //enum options res=select_bool("Sélectionne une option",(struct option[2]){{run_game_2,"option1"},{run_game_ia,"option2"}});
@@ -23,4 +40,9 @@ void main(){
   //draw(1,"Vous avez choisi %d",res);
 
   drawplateau(plateau);
+=======
+  //draw(1,"Vous avez choisi %d %d %d %d",mv.to.x,mv.to.y,mv.from.x,mv.from.y);
+  drawplateau();
+  end();
+>>>>>>> cbbf7c22d886ecdebe472da52fde8b5762b9a827
 }
