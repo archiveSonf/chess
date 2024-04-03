@@ -98,9 +98,14 @@ void draw(int move,const char *str, ...){
   va_end(args);
 }
 
-void init(){
-  printf("\033[2J");
+void clearScreen(){
+  system("clear");
   printf("\033[0;0H");
+  CurserPos=(struct _curser_pos){0,0,0,0};
+}
+
+void init(){
+  clearScreen();
   draw(1,"Bonjour Monde !");
 }
 

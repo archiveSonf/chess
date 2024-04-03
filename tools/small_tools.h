@@ -8,3 +8,6 @@ int getKey();
 
 //Permet de dessiner
 void draw(int move,char* str, ...);
+
+//Permet d'effacer entièrement l'écran
+void clearScreen();
