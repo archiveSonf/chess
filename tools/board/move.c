@@ -4,10 +4,11 @@
 #include "../small_tools.h"
 #include "../env.h"
 #include <string.h>
+#include <stdio.h>
 
 #ifndef ZONE_MOVE 
-#define zone_mv_col 10 /*Colonne de la zone de rédaction du mouvement*/
-#define zone_mv_row 10 /*Ligne de la zone de rédaction du mouvement*/
+#define zone_mv_col 16 /*Colonne de la zone de rédaction du mouvement*/
+#define zone_mv_row 16 /*Ligne de la zone de rédaction du mouvement*/
 #endif
 
 enum State{
@@ -27,31 +28,32 @@ void output(char _move[4],enum State state){
     background=sR;
   }
   start_style(cBl,background);
-  draw(1,"%s%s",_move[0],_move[1]);
+  draw(1,"%c%c",_move[0],_move[1]);
+  start_style(cB,sans_fond);
+  draw(0," %s  ",to_from);
+  start_style(cBl,background);
+  draw(0,"%c%c",_move[2],_move[3]);
   end_style();
-  draw(0," %s ",to_from);
-  start_style(cBl,sC);
-  draw(0,"%s%s",_move[2],_move[3]);
-  end_style();
+  CurserPos.X-=2;
 }
 
-int verifInput(int type,int keyCode){
+int verifInput(int type,char keyCode){
   if(type==0)
     return !(keyCode=='a'||keyCode=='b'||keyCode=='c'||keyCode=='d'||keyCode=='e'||keyCode=='f'||keyCode=='g'||keyCode=='h');
-  return !(keyCode==1||keyCode==2||keyCode==3||keyCode==4||keyCode==5||keyCode==6||keyCode==7||keyCode==8);
+  return !(keyCode=='1'||keyCode=='2'||keyCode=='3'||keyCode=='4'||keyCode=='5'||keyCode=='6'||keyCode=='7'||keyCode=='8');
 }
 
 //Effectuer un mouvement
-struct Move doMove(enum Joueur joueur){
+struct Move getMove(enum Joueur joueur){
   int isValide=0;
   char _move[4]="    ";
   struct Move mv;
   output(_move,Neutral);
   for(int i=0;i<5;i++){
-    int key;
-    if(key<4){
+    char key;
+    if(i<4){
       do{
-        key=getKey();
+        key=(char)getKey();
         if(key==backspace){
           i=i-1==-1?0:i-1;
           _move[i]=' ';
@@ -61,34 +63,36 @@ struct Move doMove(enum Joueur joueur){
       _move[i]=key;
       output(_move,Neutral);
       if(i==1){
-        int _case=plateau[(int)_move[0]-97][(int)_move[1]-1];
+        int _case=plateau[(int)_move[1]-49][(int)_move[0]-97];
         if(_case==cv){
           output(_move,InValid);
           i--;
           //TODO: Afficher un message d'erreur (Case vide)
-        }else if(_case%2==joueur){
+        }else if(_case%2!=joueur){
           output(_move,InValid);
           i--;
           //TODO: Afficher un message d'erreur (Ce n'est pas votre pièce)
-        }else{
+        }
+      }else if(i==3){
+        int _to=plateau[(int)_move[1]-49][(int)_move[0]-97];
+        int _from=plateau[(int)_move[3]-49][(int)_move[2]-97];
+        int verif=1;//TODO: Vérifier si le mouvement est valide
+        if(verif){
           output(_move,Valid);
         }
       }
-      if(i==3){
-        int _to=plateau[(int)_move[0]-97][(int)_move[1]-1];
-        int _from=plateau[(int)_move[2]-97][(int)_move[3]-1];
-        //TODO: Vérifier si le mouvement est valide
-      }
     }else{
       do{
-        key=getKey();
+        key=(char)getKey();
         if(key==backspace){
-          i=i-1==-1?0:i-1;
-          _move[i]=' ';
+          i=2;
+          _move[3]=' ';
           output(_move,Neutral);
         }
-      }while(key!=key_enter);
-      mv=(struct Move){{_move[0]-97,_move[1]},{_move[2]-97,_move[3]}};
+      }while(key!=key_enter&&key!=backspace);
+      if(key==key_enter){
+        mv=(struct Move){{(int)_move[0]-97,(int)_move[1]-49},{(int)_move[2]-97,(int)_move[3]-49}};
+      }
     }
   }
   return mv;

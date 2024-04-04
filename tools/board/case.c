@@ -5,9 +5,17 @@
 #include "./case.h"
 
 
+void backgroundcolor(char *piece, int lp,  int cp){
+    if ((lp % 2 == 0 && cp % 2 == 0) || ( lp % 2 != 0 && cp % 2 != 0 )){
+           printf("\033[47;30m %s  \033[0m",piece);
+        }
+        else {
+            printf("\033[42;30m %s  \033[0m",piece);
+        }
 
+}
 
-void drawpion (int num_pion, int lp, int cp, char background) {
+void drawpion (int num_pion, int lp, int cp) {
 //
 //    CurserPos.row = largeur_case*(lp-1) + (largeur_case/2);
 //    CurserPos.col = longueur_case*(cp-1) + (longueur_case/2);

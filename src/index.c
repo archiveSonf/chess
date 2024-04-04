@@ -1,8 +1,10 @@
 #include <stdio.h>
 #include "../tools/env.h"
+#include "../tools/style.h"
 #include "../tools/small_tools.h"
 #include "../tools/menu/menu.h"
 #include "../tools/board/board.h"
+#include "../tools/board/move.h"
 
 void main(){
   init();
@@ -21,10 +23,15 @@ void main(){
   CurserPos.col=0;
   draw(1,"Vous avez choisi %d",res);
 
-  //struct Move mv=doMove(blanc);
-  //CurserPos.row++;
-  //CurserPos.col=0;
-  //draw(1,"Vous avez choisi %d %d %d %d",mv.to.x,mv.to.y,mv.from.x,mv.from.y);
-  drawplateau();
+  CurserPos.col=10;
+  CurserPos.row=16;
+  start_style(cB,sans_fond);
+  draw(1,"Move:");
+  end_style();
+  struct Move mv=doMove(blanc);
+  CurserPos.row++;
+  CurserPos.col=0;
+  draw(1,"Vous avez choisi %d %d %d %d",mv.to.x,mv.to.y,mv.from.x,mv.from.y);
+  //drawplateau(plateau);
   end();
 }

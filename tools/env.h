@@ -10,12 +10,12 @@ struct _curser_pos{
 extern struct _curser_pos CurserPos;
 
 //Chess
-#define roi "\u265A" //♚
-#define dame "\u265B" //♛
-#define tour "\u265C" //♜
-#define fou "\u265D" //♝
-#define cavalier "\u265E" //♞
-#define pion "\u265F" //♟
+#define roi "♚" //roi
+#define dame "♛" //dame
+#define tour "♜" //tour
+#define fou "♝" //fou
+#define cavalier "♞" //cavalier
+#define pion "♟" //pion
 
 //Keycode
 #define key_left 68

@@ -54,12 +54,17 @@ void draw(int move,const char *str, ...){
           num_digits=floor(log10(abs(val)))+1;
         }
         CurserPos.X+=num_digits;
-      }else if(*str=='f'){
+      }else if(*str=='l'){
+        str++;
         double val=va_arg(args,double);
         printf("%lf",val);
         char num_digits[20];
         sprintf(num_digits,"%lf",val);
         CurserPos.X+=strlen(num_digits);
+      }else if(*str=='c'){
+        char val=va_arg(args,int);
+        printf("%c",val);
+        CurserPos.X++;
       }else if(*str=='s'){
         char *val=va_arg(args,char*);
         while(*val){
