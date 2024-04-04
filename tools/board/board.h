@@ -1,22 +1,24 @@
 #include "hit.h"
+#include "move.h"
+#include "case.h"
 
-struct Joueur{
+typedef struct{
   int id;
   char* pseudo;
   int score;
-};
+} Joueur;
 
 struct _joueurs{
-  struct Joueur player1;
-  struct Joueur player2;
+  Joueur player1;
+  Joueur player2;
 };
 
 struct _Game{
   int id;
   struct _joueurs players;
   int nombre_de_coup;
-  struct Joueur vainqueur;
-  struct hit last_hit;
+  Joueur vainqueur;
+  Hit last_hit;
 };
 
 extern struct _Game Game;
@@ -41,7 +43,7 @@ extern struct _Game Game;
 extern int plateau[8][8];
 
 //Initie le jeu
-void initGame(struct Joueur player1, struct Joueur player2);
+void initGame(Joueur player1, Joueur player2);
 
 //Dessine le tableau
 void drawplateau (int plateau[8][8]);

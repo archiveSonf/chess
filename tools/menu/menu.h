@@ -1,5 +1,5 @@
 //Les différentes options possibles
-enum options{
+typedef enum {
   run_game, //Lancer une partie
   run_game_ia, //Lancer une partie contre l'ia
   run_game_2, //Lancer une partie de 2 joueurs
@@ -7,13 +7,13 @@ enum options{
   analyz_old_game,  //Analyser les anciennes parties
   see_scores, //Voir le tableau des cores
   quitter, //Quitter le jeu
-};
+} options;
 
 //Crèe une option de menu
-struct option{
-  enum options id;
+typedef struct {
+  options id;
   char* txt;
-};
+} option;
 
-enum options select_bool(char q[],struct option opts[2]);
-enum options select_list(char* q,int nbr_opts,struct option opts[]);
+options select_bool(char q[],option opts[2]);
+options select_list(char* q,int nbr_opts,option opts[]);

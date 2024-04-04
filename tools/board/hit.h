@@ -1,8 +1,9 @@
-struct hit{
+typedef struct _hit{
   int num;
   int note;
-  struct hit previous_hit;
-};
+  struct _hit *previous_hit;
+} Hit;
+
 
 // Ecris le coup joué
 void write_hit(char hit[4]);

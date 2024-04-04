@@ -3,7 +3,6 @@
 #include <termios.h>
 #include <unistd.h>
 #include "env.h"
-#include "style.h"
 #include <string.h>
 #include <math.h>
 #include <stdlib.h>

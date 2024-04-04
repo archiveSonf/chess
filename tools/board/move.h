@@ -1,18 +1,19 @@
 //Coordonnées sur la plateau
 
-struct _coord{
+typedef struct {
   int x;
   int y;
-};
-struct Move{
+} coord;
+
+typedef struct {
   char string[4];
-  struct _coord to;
-  struct _coord from;
-};
+  coord to;
+  coord from;
+} Move;
 
 //Joueur
-enum joueur{player1,player2};
+typedef enum {player1,player2} joueur;
 
 //Effectuer un mouvement
-struct Move getMove(enum joueur joueur);
+Move getMove(joueur joueur);
 

@@ -1,3 +1,5 @@
+#include "style.h"
+#include "small_tools.h"
 
 struct _curser_pos{
   int row;
@@ -8,14 +10,6 @@ struct _curser_pos{
 //Permet de donner la position du curseur, 
 //pour afficher y afficher du texte
 extern struct _curser_pos CurserPos;
-
-//Chess
-#define roi "♚" //roi
-#define dame "♛" //dame
-#define tour "♜" //tour
-#define fou "♝" //fou
-#define cavalier "♞" //cavalier
-#define pion "♟" //pion
 
 //Keycode
 #define key_left 68

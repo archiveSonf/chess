@@ -1,7 +1,4 @@
 #include "board.h"
-#include "move.h"
-#include "../style.h"
-#include "../small_tools.h"
 #include "../env.h"
 #include <string.h>
 
@@ -43,10 +40,10 @@ int verifInput(int type,char keyCode){
 }
 
 //Effectuer un mouvement
-struct Move getMove(enum joueur joueur){
+Move getMove(joueur joueur){
   int isValide=0;
   char _move[4]="    ";
-  struct Move mv;
+  Move mv;
   output(_move,Neutral);
   for(int i=0;i<5;i++){
     char key;
@@ -90,7 +87,7 @@ struct Move getMove(enum joueur joueur){
         int verif=1;//TODO: Vérifier si le mouvement est valide
         if(verif){
           output(_move,Valid);
-          mv=(struct Move){{_move[0],_move[1],_move[2],_move[3]},
+          mv=(Move){{_move[0],_move[1],_move[2],_move[3]},
             {(int)_move[0]-97,(int)_move[1]-49},
             {(int)_move[2]-97,(int)_move[3]-49}};
         }else{
