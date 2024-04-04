@@ -5,6 +5,7 @@ struct _coord{
   int y;
 };
 struct Move{
+  char string[4];
   struct _coord to;
   struct _coord from;
 };
@@ -13,5 +14,5 @@ struct Move{
 enum Joueur{blanc,noir};
 
 //Effectuer un mouvement
-struct Move doMove(enum Joueur joueur);
+struct Move getMove(enum Joueur joueur);
 

@@ -54,12 +54,17 @@ void draw(int move,const char *str, ...){
           num_digits=floor(log10(abs(val)))+1;
         }
         CurserPos.X+=num_digits;
-      }else if(*str=='f'){
+      }else if(*str=='l'){
+        str++;
         double val=va_arg(args,double);
         printf("%lf",val);
         char num_digits[20];
         sprintf(num_digits,"%lf",val);
         CurserPos.X+=strlen(num_digits);
+      }else if(*str=='c'){
+        char val=va_arg(args,int);
+        printf("%c",val);
+        CurserPos.X++;
       }else if(*str=='s'){
         char *val=va_arg(args,char*);
         while(*val){
@@ -98,11 +103,15 @@ void draw(int move,const char *str, ...){
   va_end(args);
 }
 
-void init(){
-  //printf("\033[2J");
+void clearScreen(){
   system("clear");
+  printf("\033[0;0H");
+  CurserPos=(struct _curser_pos){0,0,0,0};
+}
+
+void init(){
+  clearScreen();
   draw(1,"Bonjour Monde !");
-  draw(0,"\n");
 }
 
 int getKey(){

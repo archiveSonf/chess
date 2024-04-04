@@ -1,8 +1,10 @@
 #include <stdio.h>
 #include "../tools/env.h"
+#include "../tools/style.h"
 #include "../tools/small_tools.h"
 #include "../tools/menu/menu.h"
 #include "../tools/board/board.h"
+#include "../tools/board/move.h"
 
 void main(){
   init();

@@ -5,33 +5,38 @@
 #include "../small_tools.h"
 #include <stdio.h>
 
-int plateau[8][8]={
-  {ctb,ccb,cfb,cdb,crb,cfb,ccb,ctb},
-  {cpb,cpb,cpb,cpb,cpb,cpb,cpb,cpb},
-  {cv,cv,cv,cv,cv,cv,cv,cv},
-  {cv,cv,cv,cv,cv,cv,cv,cv},
-  {cv,cv,cv,cv,cv,cv,cv,cv},
-  {cv,cv,cv,cv,cv,cv,cv,cv},
-  {cpn,cpn,cpn,cpn,cpn,cpn,cpn,cpn},
-  {ctn,ccn,cfn,cdn,crn,cfn,ccn,ctn}
-};
+int plateau[8][8] = {
+		{ctb, ccb, cfb, cdb, crb, cfb, ccb, ctb},
+		{cpb, cpb, cpb, cpb, cpb, cpb, cpb, cpb},
+		{cv, cv, cv, cv, cv, cv, cv, cv},
+		{cv, cv, cv, cv, cv, cv, cv, cv},
+		{cv, cv, cv, cv, cv, cv, cv, cv},
+		{cv, cv, cv, cv, cv, cv, cv, cv},
+		{cpn, cpn, cpn, cpn, cpn, cpn, cpn, cpn},
+		{ctn, ccn, cfn, cdn, crn, cfn, ccn, ctn}};
 
-void drawplateau (int plateau[8][8]) {
-    //for(int i=1;i<9;i++){
-    //    for (int j=1; j<9;j++){
-    //        CurserPos.row = largeur_case*(i-1) + 2;
-    //        CurserPos.col = longueur_case*(j-1) + 1 ;
-    //        if (((i%2 == 0 && j%2 == 0) || (i%2 != 0 && j%2 !=0 )) ){
-    //            for (int m=0;m<largeur_case;m++){
-    //                int move=1;
-    //                for(int n=0;n<longueur_case;n++){
-    //                    start_style(cG,sC);
-    //                    draw(move,"1");
-    //                    move=0;
-    //                }
-    //                CurserPos.row++;
-    //            }
-    //        }
+void drawplateau(int plateau[8][8])
+{
+	for (int i = 1; i < 9; i++)
+	{
+	//	for (int j = 1; j < 9; j++)
+	//	{
+	//		CurserPos.row = largeur_case * (i - 1) + 2;
+	//		CurserPos.col = longueur_case * (j - 1) + 1;
+	//		if (((i % 2 == 0 && j % 2 == 0) || (i % 2 != 0 && j % 2 != 0)))
+	//		{
+	//			for (int m = 0; m < largeur_case; m++)
+	//			{
+	//				int move = 1;
+	//				for (int n = 0; n < longueur_case; n++)
+	//				{
+	//					start_style(cG, sC);
+	//					draw(move, "1");
+	//					move = 0;
+	//				}
+	//				CurserPos.row++;
+	//			}
+	//		}
 //
     //        else{
     //            for (int u=0;u<largeur_case;u++){
@@ -102,4 +107,5 @@ void drawplateau (int plateau[8][8]) {
     
 }
     
-
+	
+}
