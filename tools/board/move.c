@@ -43,7 +43,7 @@ int verifInput(int type,char keyCode){
 }
 
 //Effectuer un mouvement
-struct Move getMove(enum Joueur joueur){
+struct Move getMove(enum joueur joueur){
   int isValide=0;
   char _move[4]="    ";
   struct Move mv;
@@ -85,8 +85,8 @@ struct Move getMove(enum Joueur joueur){
         }
       }while(key!=key_enter&&key!=backspace);
       if(key==key_enter){
-        int _to=plateau[(int)_move[1]-49][(int)_move[0]-97];
-        int _from=plateau[(int)_move[3]-49][(int)_move[2]-97];
+        //int _to=plateau[(int)_move[1]-49][(int)_move[0]-97];
+        //int _from=plateau[(int)_move[3]-49][(int)_move[2]-97];
         int verif=1;//TODO: Vérifier si le mouvement est valide
         if(verif){
           output(_move,Valid);
@@ -96,6 +96,7 @@ struct Move getMove(enum Joueur joueur){
         }else{
           output(_move,InValid);
           i=2;
+          //TODO: Afficher un message d'erreur (Mouvement invalide)
         }
       }
     }

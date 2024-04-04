@@ -11,8 +11,8 @@ struct Move{
 };
 
 //Joueur
-enum Joueur{blanc,noir};
+enum joueur{player1,player2};
 
 //Effectuer un mouvement
-struct Move getMove(enum Joueur joueur);
+struct Move getMove(enum joueur joueur);
 

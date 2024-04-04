@@ -1,3 +1,26 @@
+#include "hit.h"
+
+struct Joueur{
+  int id;
+  char* pseudo;
+  int score;
+};
+
+struct _joueurs{
+  struct Joueur player1;
+  struct Joueur player2;
+};
+
+struct _Game{
+  int id;
+  struct _joueurs players;
+  int nombre_de_coup;
+  struct Joueur vainqueur;
+  struct hit last_hit;
+};
+
+extern struct _Game Game;
+
 //Contenu Case
 #define cv -1 //Case vide
 #define cpb 0 //Case pion blanc
@@ -16,4 +39,9 @@
 
 //Plateau de jeu
 extern int plateau[8][8];
+
+//Initie le jeu
+void initGame(struct Joueur player1, struct Joueur player2);
+
+//Dessine le tableau
 void drawplateau (int plateau[8][8]);

@@ -5,16 +5,6 @@
 #include "../small_tools.h"
 #include <stdio.h>
 
-int plateau[8][8] = {
-		{ctb, ccb, cfb, cdb, crb, cfb, ccb, ctb},
-		{cpb, cpb, cpb, cpb, cpb, cpb, cpb, cpb},
-		{cv, cv, cv, cv, cv, cv, cv, cv},
-		{cv, cv, cv, cv, cv, cv, cv, cv},
-		{cv, cv, cv, cv, cv, cv, cv, cv},
-		{cv, cv, cv, cv, cv, cv, cv, cv},
-		{cpn, cpn, cpn, cpn, cpn, cpn, cpn, cpn},
-		{ctn, ccn, cfn, cdn, crn, cfn, ccn, ctn}};
-
 void drawplateau(int plateau[8][8])
 {
 	for (int i = 1; i < 9; i++)
@@ -126,4 +116,21 @@ void drawplateau(int plateau[8][8])
 	//     }
 	//     printf("\n");
 	// }
+}
+
+void initGame(struct Joueur player1, struct Joueur player2){
+
+  struct _Game Game = {1,{player1,player2},0,{},{}};
+
+	int plateau[8][8] = {
+		{ctb, ccb, cfb, cdb, crb, cfb, ccb, ctb},
+		{cpb, cpb, cpb, cpb, cpb, cpb, cpb, cpb},
+		{cv, cv, cv, cv, cv, cv, cv, cv},
+		{cv, cv, cv, cv, cv, cv, cv, cv},
+		{cv, cv, cv, cv, cv, cv, cv, cv},
+		{cv, cv, cv, cv, cv, cv, cv, cv},
+		{cpn, cpn, cpn, cpn, cpn, cpn, cpn, cpn},
+		{ctn, ccn, cfn, cdn, crn, cfn, ccn, ctn}};
+    
+  //drawplateau(plateau);
 }
