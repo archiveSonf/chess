@@ -4,13 +4,8 @@
 #include <unistd.h>
 #include "env.h"
 #include "style.h"
-<<<<<<< HEAD
-#include <ncurses.h>
-#include <wchar.h>
-=======
 #include <string.h>
 #include <math.h>
->>>>>>> cbbf7c22d886ecdebe472da52fde8b5762b9a827
 #include <stdlib.h>
 
 
@@ -104,27 +99,10 @@ void draw(int move,const char *str, ...){
 }
 
 void init(){
-<<<<<<< HEAD
-  system("clear");
-  //printf("\033[2J\033[H");
-  //initscr();
-  //mvaddwch(CurserPos.row, CurserPos.col, L'♔');
-  //refresh();
-  //move(CurserPos.row, CurserPos.col);
-    // Afficher le message
-  //printw("Hello");
-  
-  //getch();
-  //endwin();
-  //(CurserPos.row, CurserPos.col, L'♔');
   //printf("\033[2J");
-  //printf("\033[8;%d;%dt", 1, 1);
-  draw(1,"Bonjour Monde !\n");
-=======
-  printf("\033[2J");
-  printf("\033[0;0H");
+  system("clear");
   draw(1,"Bonjour Monde !");
->>>>>>> cbbf7c22d886ecdebe472da52fde8b5762b9a827
+  draw(0,"\n");
 }
 
 int getKey(){
@@ -138,14 +116,6 @@ int getKey(){
   return k;
 }
 
-<<<<<<< HEAD
-
-int terminal() {
-    system("stty rows 4 cols 100"); // Redimensionne le terminal à 40 lignes et 100 colonnes
-    printf("Terminal redimensionné avec succès.\n");
-    return 0;
-=======
 void end(){
   printf("\n\n");
->>>>>>> cbbf7c22d886ecdebe472da52fde8b5762b9a827
 }

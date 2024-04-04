@@ -15,7 +15,6 @@ void backgroundcolor(char *piece, int lp,  int cp){
 
 }
 
-<<<<<<< HEAD
 void drawpion (int num_pion, int lp, int cp) {
 
     switch (num_pion)
@@ -76,8 +75,8 @@ void drawpion (int num_pion, int lp, int cp) {
     default:
         break;
     }
-=======
-void drawpion (int num_pion, int lp, int cp, char background) {
+}
+//void drawpion (int num_pion, int lp, int cp, char background) {
 //
 //    CurserPos.row = largeur_case*(lp-1) + (largeur_case/2);
 //    CurserPos.col = longueur_case*(cp-1) + (longueur_case/2);
@@ -157,5 +156,4 @@ void drawpion (int num_pion, int lp, int cp, char background) {
 //    default:
 //        break;
 //    }
->>>>>>> cbbf7c22d886ecdebe472da52fde8b5762b9a827
-}
+//}

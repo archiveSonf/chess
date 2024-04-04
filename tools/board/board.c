@@ -37,7 +37,7 @@ void drawplateau (int plateau[8][8]) {
     //            for (int u=0;u<largeur_case;u++){
     //                int move=1;
     //                for(int v=0;v<longueur_case;v++){
-    //                    start_style(cB,sC);
+    //                    start_style(cG,sG);
     //                    draw(move,"1");
     //                    move=0;
     //                }
@@ -59,7 +59,7 @@ void drawplateau (int plateau[8][8]) {
     //            draw(0,"  ");
     //        }
     //    }
-    //    printf("\n");
+    //    draw(0,"\n");
 //
     //    }
     //    for (int k=0; k<largeur_case;k++){
@@ -73,13 +73,11 @@ void drawplateau (int plateau[8][8]) {
     //            draw(0,"  ");
     //        }
     //    }
-    //    printf("\n");
+    //    draw(0,"\n");
 //
     //    }
     //}
-    //terminal();
-    //init();
-    //CurserPos.row = 2;
+    //CurserPos.row = 1;
     //CurserPos.col = 0;
     //draw(1,"♜") ;
     ////drawpion(plateau[0][0],1,1,sW);
@@ -88,35 +86,17 @@ void drawplateau (int plateau[8][8]) {
     //CurserPos.col = 0;
     //draw(1,"");
 
-    //for(int u=1;u<9;u++){
-    //    for (int v=1; v=9;v++){
-    //        if ((u%2 == 0 && v%2 == 0) || (u%2 != 0 && v%2 !=0 )){
-    //            drawpion(plateau[u][v],u,v,sW);
-    //        }
-    //        else{
-    //            drawpion(plateau[u][v],u,v,sC);
-    //        }
-    //    }
-    //}
-    
+
+    int num = 8;
     for (int i=0; i<8;i++){
-        //if(i%2==0){
-        //        for (int u=0;u<4;u++){
-        //        printf("\033[47;30m    \033[0m\033[42;30m    \033[0m");
-        //    }
-        //    printf("\n");
-        //    }
-        //    else {
-        //        for (int u=0;u<4;u++){
-        //        printf("\033[42;30m    \033[0m\033[47;30m    \033[0m");
-        //    }
-        //    printf("\n");
-        //    }
+        printf("%d ",num);
         for (int j=0; j<8;j++){
             drawpion(plateau[i][j], i , j);
         }
         printf("\n");
+        num--;
     }
+    printf("   a   b   c   d   e   f   g   h \n");
     
     
     
