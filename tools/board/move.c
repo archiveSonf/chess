@@ -53,6 +53,8 @@ struct Move getMove(enum Joueur joueur){
     if(i<4){
       do{
         key=(char)getKey();
+        _move[i]=' ';
+        output(_move,Neutral);
         if(key==backspace){
           i=i-1==-1?0:i-1;
           _move[i]=' ';
@@ -72,13 +74,6 @@ struct Move getMove(enum Joueur joueur){
           i--;
           //TODO: Afficher un message d'erreur (Ce n'est pas votre pièce)
         }
-      }else if(i==3){
-        int _to=plateau[(int)_move[1]-49][(int)_move[0]-97];
-        int _from=plateau[(int)_move[3]-49][(int)_move[2]-97];
-        int verif=1;//TODO: Vérifier si le mouvement est valide
-        if(verif){
-          output(_move,Valid);
-        }
       }
     }else{
       do{
@@ -90,7 +85,18 @@ struct Move getMove(enum Joueur joueur){
         }
       }while(key!=key_enter&&key!=backspace);
       if(key==key_enter){
-        mv=(struct Move){{(int)_move[0]-97,(int)_move[1]-49},{(int)_move[2]-97,(int)_move[3]-49}};
+        int _to=plateau[(int)_move[1]-49][(int)_move[0]-97];
+        int _from=plateau[(int)_move[3]-49][(int)_move[2]-97];
+        int verif=1;//TODO: Vérifier si le mouvement est valide
+        if(verif){
+          output(_move,Valid);
+          mv=(struct Move){{_move[0],_move[1],_move[2],_move[3]},
+            {(int)_move[0]-97,(int)_move[1]-49},
+            {(int)_move[2]-97,(int)_move[3]-49}};
+        }else{
+          output(_move,InValid);
+          i=2;
+        }
       }
     }
   }

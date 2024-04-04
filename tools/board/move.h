@@ -5,6 +5,7 @@ struct _coord{
   int y;
 };
 struct Move{
+  char string[4];
   struct _coord to;
   struct _coord from;
 };

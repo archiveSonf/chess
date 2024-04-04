@@ -31,7 +31,7 @@ void main(){
   struct Move mv=getMove(blanc);
   CurserPos.row++;
   CurserPos.col=0;
-  draw(1,"Vous avez choisi %d %d %d %d",mv.to.x,mv.to.y,mv.from.x,mv.from.y);
+  draw(1,"Vous avez choisi %s :%d %d %d %d",mv.string,mv.to.x,mv.to.y,mv.from.x,mv.from.y);
   //drawplateau(plateau);
   end();
 }
