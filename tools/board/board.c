@@ -5,6 +5,11 @@
 #include "../small_tools.h"
 #include <stdio.h>
 
+#ifndef PlateauPosition 
+#define plateau_col 0 
+#define plateau_row 2 
+#endif
+
 int plateau[8][8] = {
 		{ctb, ccb, cfb, cdb, crb, cfb, ccb, ctb},
 		{cpb, cpb, cpb, cpb, cpb, cpb, cpb, cpb},
@@ -17,8 +22,8 @@ int plateau[8][8] = {
 
 void drawplateau(int plateau[8][8])
 {
-	for (int i = 1; i < 9; i++)
-	{
+	//for (int i = 1; i < 9; i++)
+	//{
 	//	for (int j = 1; j < 9; j++)
 	//	{
 	//		CurserPos.row = largeur_case * (i - 1) + 2;
@@ -91,7 +96,10 @@ void drawplateau(int plateau[8][8])
     //CurserPos.col = 0;
     //draw(1,"");
 
+    CurserPos.row = plateau_row;
+    CurserPos.col = plateau_col;
 
+    draw(1,"");
     int num = 8;
     for (int i=0; i<8;i++){
         printf("%d ",num);
@@ -108,4 +116,3 @@ void drawplateau(int plateau[8][8])
 }
     
 	
-}
