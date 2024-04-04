@@ -4,7 +4,6 @@
 #include "../small_tools.h"
 #include "../env.h"
 #include <string.h>
-#include <stdio.h>
 
 #ifndef ZONE_MOVE 
 #define zone_mv_col 16 /*Colonne de la zone de rédaction du mouvement*/
