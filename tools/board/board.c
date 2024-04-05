@@ -72,9 +72,7 @@ void runGame(GAME *game,Joueur *player1,Joueur *player2){
   start_style(cP,sans_fond);
   draw(1,"%s",player1->pseudo);
   CurserPos.col=zone_old_hit_col+10;
-  start_style(cP0,sans_fond);
   draw(1,"    ");
-  start_style(cP,sans_fond);
   draw(0,"%s",player2->pseudo);
   end_style();
 

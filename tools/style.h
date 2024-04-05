@@ -5,9 +5,9 @@
 #define cY "\033[1;33m" //text jaune
 #define cB "\033[1;34m" //text bleu
 #define cP "\033[1;35m" //text violet
-#define cP0 "\033[0;35m" //text violet
 #define cC "\033[1;36m" //text cyan
 #define cW "\033[1;37m" //text white
+#define cW0 "\033[0;30m" //text gris
 
 //Sourlignage
 #define sans_fond "" //sans fond

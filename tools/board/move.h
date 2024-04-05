@@ -11,7 +11,7 @@ typedef struct {
 } coord;
 
 typedef struct {
-  char string[4];
+  char *string;
   coord to;
   coord from;
 } Move;

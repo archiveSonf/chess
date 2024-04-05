@@ -13,7 +13,7 @@ typedef struct _hit{
 
 
 // Ecris le coup joué
-void write_hit(char hit[4]);
+void write_hit(char *hit);
 
 // Sauvegarde les coups joués dans la partie
-void SaveGame(char hit[4]);
+void SaveGame();

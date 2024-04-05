@@ -1,6 +1,7 @@
 #include "board.h"
 #include "../env.h"
 #include <string.h>
+#include <stdlib.h>
 
 enum State{
   Valid,
@@ -82,9 +83,11 @@ Move getMove(joueur joueur){
         int verif=1;//TODO: Vérifier si le mouvement est valide
         if(verif){
           output(_move,Valid);
-          mv=(Move){{_move[0],_move[1],_move[2],_move[3]},
+          mv=(Move){NULL,
             {(int)_move[0]-97,56-(int)_move[1]},
             {(int)_move[2]-97,56-(int)_move[3]}};
+          mv.string=malloc(4*sizeof(char));
+          strcpy(mv.string,_move);
         }else{
           output(_move,InValid);
           i=2;
