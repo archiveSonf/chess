@@ -2,26 +2,31 @@
 #include "move.h"
 #include "case.h"
 
+#ifndef PlateauPosition 
+#define plateau_col 0 
+#define plateau_row 4 
+#endif
+
 typedef struct{
   int id;
-  char* pseudo;
+  char pseudo[8];
   int score;
 } Joueur;
 
 struct _joueurs{
-  Joueur player1;
-  Joueur player2;
+  Joueur *player1;
+  Joueur *player2;
 };
 
-struct _Game{
+typedef struct{
   int id;
   struct _joueurs players;
   int nombre_de_coup;
-  Joueur vainqueur;
-  Hit last_hit;
-};
+  Joueur *vainqueur;
+  Hit *last_hit;
+} GAME;
 
-extern struct _Game Game;
+extern GAME Game;
 
 //Contenu Case
 #define cv -1 //Case vide
@@ -43,7 +48,7 @@ extern struct _Game Game;
 extern int plateau[8][8];
 
 //Initie le jeu
-void initGame(Joueur player1, Joueur player2);
+void runGame(GAME *game,Joueur *player1, Joueur *player2);
 
 //Dessine le tableau
 void drawplateau (int plateau[8][8]);

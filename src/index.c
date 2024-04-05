@@ -15,19 +15,9 @@ void main(){
 
   CurserPos.row++;
   CurserPos.col=0;
-  draw(1,"Vous avez choisi %d",res);
+  draw(1,"Vous avez choisi %d",res);fflush(stdout);
 
-  initGame((Joueur){1,"Joueur1",0},(Joueur){2,"Joueur2",0});
-
-  CurserPos.col=10;
-  CurserPos.row=16;
-  start_style(cB,sans_fond);
-  draw(1,"Move:");
-  end_style();
-  Move mv=getMove(player1);
-  CurserPos.row++;
-  CurserPos.col=0;
-  draw(1,"Vous avez choisi %s :%d %d %d %d",mv.string,mv.to.x,mv.to.y,mv.from.x,mv.from.y);
+  runGame(NULL,&(Joueur){1,"Joueur1",0},&(Joueur){2,"Joueur2",0});
 
   end();
 }

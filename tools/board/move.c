@@ -2,11 +2,6 @@
 #include "../env.h"
 #include <string.h>
 
-#ifndef ZONE_MOVE 
-#define zone_mv_col 16 /*Colonne de la zone de rédaction du mouvement*/
-#define zone_mv_row 16 /*Ligne de la zone de rédaction du mouvement*/
-#endif
-
 enum State{
   Valid,
   InValid,
@@ -61,7 +56,7 @@ Move getMove(joueur joueur){
       _move[i]=key;
       output(_move,Neutral);
       if(i==1){
-        int _case=plateau[(int)_move[1]-49][(int)_move[0]-97];
+        int _case=plateau[56-(int)_move[1]][(int)_move[0]-97];
         if(_case==cv){
           output(_move,InValid);
           i--;
@@ -88,8 +83,8 @@ Move getMove(joueur joueur){
         if(verif){
           output(_move,Valid);
           mv=(Move){{_move[0],_move[1],_move[2],_move[3]},
-            {(int)_move[0]-97,(int)_move[1]-49},
-            {(int)_move[2]-97,(int)_move[3]-49}};
+            {(int)_move[0]-97,56-(int)_move[1]},
+            {(int)_move[2]-97,56-(int)_move[3]}};
         }else{
           output(_move,InValid);
           i=2;
