@@ -7,6 +7,14 @@
 #define plateau_row 4 
 #endif
 
+#ifndef ZONE_OPTIONS
+#define zone_options_col 0
+#define zone_options_row 20
+#endif
+
+//Plateau de jeu
+extern int plateau[8][8];
+
 typedef struct{
   int id;
   char pseudo[8];
@@ -24,6 +32,7 @@ typedef struct{
   int nombre_de_coup;
   Joueur *vainqueur;
   Hit *last_hit;
+  int plateau[8][8];
 } GAME;
 
 extern GAME Game;
@@ -42,10 +51,6 @@ extern GAME Game;
 #define ctn 7 //Case tour noir
 #define cdn 9 //Case dame noir
 #define crn 11 //Case roi noir
-
-
-//Plateau de jeu
-extern int plateau[8][8];
 
 //Initie le jeu
 void runGame(GAME *game,Joueur *player1, Joueur *player2);

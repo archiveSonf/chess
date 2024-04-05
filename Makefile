@@ -11,4 +11,4 @@ run: ##Run le jeu
 files=src/index.c tools/menu/*.c tools/board/*.c tools/*.c
 
 compil: $(files) ##(files:optionnel) Compile les fichiers spécifiers en un fichier éxecutables chess.exe
-	gcc -o dist/chess.exe $(files) -lm
+	gcc -o dist/chess.exe $(files) -lm -ljansson

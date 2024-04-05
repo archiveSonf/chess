@@ -16,4 +16,4 @@ typedef struct _hit{
 void write_hit(char *hit);
 
 // Sauvegarde les coups joués dans la partie
-void SaveGame();
+int SaveGame(char *db_file);
