@@ -2,6 +2,7 @@
 #include "../env.h"
 #include <string.h>
 #include <stdlib.h>
+#include <stdio.h>
 
 enum State{
   Valid,
@@ -41,6 +42,7 @@ Move getMove(joueur joueur){
   char _move[4]="    ";
   Move mv;
   output(_move,Neutral);
+  send_msg(MSG_INFO,"Entrez le mouvement");
   for(int i=0;i<5;i++){
     char key;
     if(i<4){
@@ -48,24 +50,28 @@ Move getMove(joueur joueur){
         key=(char)getKey();
         _move[i]=' ';
         output(_move,Neutral);
+        send_msg(MSG_INFO,"Entrez le mouvement");
+
         if(key==backspace){
           i=i-1==-1?0:i-1;
           _move[i]=' ';
           output(_move,Neutral);
+          send_msg(MSG_INFO,"Entrez le mouvement");
         }
       }while(verifInput(i%2,key));
       _move[i]=key;
       output(_move,Neutral);
+      send_msg(MSG_INFO,"Entrez le mouvement");
       if(i==1){
         int _case=plateau[56-(int)_move[1]][(int)_move[0]-97];
         if(_case==cv){
           output(_move,InValid);
           i--;
-          //TODO: Afficher un message d'erreur (Case vide)
+          send_msg(MSG_ERROR,"Cette case est vide");
         }else if(_case%2!=joueur){
           output(_move,InValid);
           i--;
-          //TODO: Afficher un message d'erreur (Ce n'est pas votre pièce)
+          send_msg(MSG_ERROR,"Cette figurine ne vous appartient pas");
         }
       }
     }else{
@@ -75,6 +81,7 @@ Move getMove(joueur joueur){
           i=2;
           _move[3]=' ';
           output(_move,Neutral);
+          send_msg(MSG_INFO,"Entrez le mouvement");
         }
       }while(key!=key_enter&&key!=backspace);
       if(key==key_enter){
@@ -83,6 +90,7 @@ Move getMove(joueur joueur){
         int verif=1;//TODO: Vérifier si le mouvement est valide
         if(verif){
           output(_move,Valid);
+          send_msg(MSG_SUCCESS,"Mouvement valide");
           mv=(Move){NULL,
             {(int)_move[0]-97,56-(int)_move[1]},
             {(int)_move[2]-97,56-(int)_move[3]}};
@@ -91,7 +99,7 @@ Move getMove(joueur joueur){
         }else{
           output(_move,InValid);
           i=2;
-          //TODO: Afficher un message d'erreur (Mouvement invalide)
+          send_msg(MSG_ERROR,"Ce mouvement est invalide");
         }
       }
     }

@@ -36,6 +36,7 @@ void play(){
   Move mv=getMove(j);
   plateau[mv.from.y][mv.from.x]=plateau[mv.to.y][mv.to.x];
   plateau[mv.to.y][mv.to.x]=cv;
+  //TODO: fonction d'évolution du pion
   drawplateau(plateau);
   write_hit(mv.string);
   j=j==player1?player2:player1;
@@ -71,7 +72,7 @@ void runGame(GAME *game,Joueur *player1,Joueur *player2){
   CurserPos.row=zone_old_hit_row-1;
   start_style(cP,sans_fond);
   draw(1,"%s",player1->pseudo);
-  CurserPos.col=zone_old_hit_col+10;
+  CurserPos.col=zone_old_hit_col+15;
   draw(1,"    ");
   draw(0,"%s",player2->pseudo);
   end_style();

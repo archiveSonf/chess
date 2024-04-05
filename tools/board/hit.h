@@ -7,7 +7,7 @@ typedef struct _hit{
   int player;
   int numero_coup;
   char *hit;
-  int note;
+  double note;
   struct _hit *previous_hit;
 } Hit;
 

@@ -8,7 +8,7 @@ void write_hit(char *hit){
   Hit *new_hit=malloc(sizeof(Hit));
   new_hit->player=player;
   player=player==player1?player2:player1;
-  new_hit->note=7;//TODO: convertir le coup en note
+  new_hit->note=.77;//TODO: convertir le coup en note
   new_hit->numero_coup=++Game.nombre_de_coup;
   new_hit->hit=hit;
   new_hit->previous_hit=Game.last_hit;
@@ -22,15 +22,23 @@ void write_hit(char *hit){
     if(current_hit!=NULL){
       int num=current_hit->numero_coup;
       if(i==0&&num%2==1){
-        CurserPos.col=zone_old_hit_col+14;
+        CurserPos.col=zone_old_hit_col+19;
         start_style(cW0,sans_fond);
-        draw(1,"          ");
+        draw(1,"               ");
         end_style();
       }
-      CurserPos.col=zone_old_hit_col+14*(1-num%2);
+      CurserPos.col=zone_old_hit_col+19*(1-num%2);
 
       start_style(cW0,sans_fond);
-      draw(1,"#%d %s",current_hit->numero_coup,current_hit->hit);
+      draw(1,"#%d %s ",current_hit->numero_coup,current_hit->hit);
+      char* color=cG;
+      if(current_hit->note<.7&&current_hit->note>=.4){
+        color=cY;
+      }else if(current_hit->note<.4){
+        color=cR;
+      }
+      start_style(color,sans_fond);
+      draw(0,"%.2lf",current_hit->note);
       end_style();
       current_hit=current_hit->previous_hit;
       if(num%2==1){CurserPos.row++;}
