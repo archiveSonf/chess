@@ -1,3 +1,5 @@
+#include "path.h"
+
 //Contenu Case
 #define cv -1 //Case vide
 #define cpb 0 //Case pion blanc

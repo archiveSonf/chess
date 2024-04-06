@@ -6,6 +6,7 @@
 #include "../tools/board/board.h"
 #include "../tools/board/move.h"
 
+
 void main(){
   init();
   //CurserPos.row++;
@@ -27,7 +28,9 @@ void main(){
   //CurserPos.row++;
   //CurserPos.col=0;
   //draw(1,"Vous avez choisi %d %d %d %d",mv.to.x,mv.to.y,mv.from.x,mv.from.y);
-  drawplateau(plateau);
+  //drawplateau(plateau);
+  //printf("\x1b[9;1;t");
+  //path_piece(3,0);
+  printf("\n%d",coup_valide(3,0,2,0));
   end();
-  printf("\x1b[9;1;t");
 }
