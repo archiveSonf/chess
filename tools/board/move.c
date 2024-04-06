@@ -11,10 +11,13 @@ enum State{
 };
 
 //Présentation du move
-void output(char _move[4],enum State state){
+void output(char _move[4],enum State state,joueur j){
   CurserPos.row=zone_mv_row;
   CurserPos.col=zone_mv_col;
-  char* background=sC;
+  char* background=sP;
+  if(j==1){
+    background=sC;
+  }
   if(state==Valid){
     background=sG;
   }else if(state==InValid){
@@ -41,7 +44,7 @@ Move getMove(joueur joueur){
   int isValide=0;
   char _move[4]="    ";
   Move mv;
-  output(_move,Neutral);
+  output(_move,Neutral,joueur);
   send_msg(MSG_INFO,"Entrez le mouvement");
   for(int i=0;i<5;i++){
     char key;
@@ -49,27 +52,27 @@ Move getMove(joueur joueur){
       do{
         key=(char)getKey();
         _move[i]=' ';
-        output(_move,Neutral);
+        output(_move,Neutral,joueur);
         send_msg(MSG_INFO,"Entrez le mouvement");
 
         if(key==backspace){
           i=i-1==-1?0:i-1;
           _move[i]=' ';
-          output(_move,Neutral);
+          output(_move,Neutral,joueur);
           send_msg(MSG_INFO,"Entrez le mouvement");
         }
       }while(verifInput(i%2,key));
       _move[i]=key;
-      output(_move,Neutral);
+      output(_move,Neutral,joueur);
       send_msg(MSG_INFO,"Entrez le mouvement");
       if(i==1){
         int _case=plateau[56-(int)_move[1]][(int)_move[0]-97];
         if(_case==cv){
-          output(_move,InValid);
+          output(_move,InValid,joueur);
           i--;
           send_msg(MSG_ERROR,"Cette case est vide");
         }else if(_case%2!=joueur){
-          output(_move,InValid);
+          output(_move,InValid,joueur);
           i--;
           send_msg(MSG_ERROR,"Cette figurine ne vous appartient pas");
         }
@@ -80,7 +83,7 @@ Move getMove(joueur joueur){
         if(key==backspace){
           i=2;
           _move[3]=' ';
-          output(_move,Neutral);
+          output(_move,Neutral,joueur);
           send_msg(MSG_INFO,"Entrez le mouvement");
         }
       }while(key!=key_enter&&key!=backspace);
@@ -89,7 +92,7 @@ Move getMove(joueur joueur){
         //int _from=plateau[(int)_move[3]-49][(int)_move[2]-97];
         int verif=1;//TODO: Vérifier si le mouvement est valide
         if(verif){
-          output(_move,Valid);
+          output(_move,Valid,joueur);
           send_msg(MSG_SUCCESS,"Mouvement valide");
           mv=(Move){NULL,
             {(int)_move[0]-97,56-(int)_move[1]},
@@ -97,7 +100,7 @@ Move getMove(joueur joueur){
           mv.string=malloc(4*sizeof(char));
           strcpy(mv.string,_move);
         }else{
-          output(_move,InValid);
+          output(_move,InValid,joueur);
           i=2;
           send_msg(MSG_ERROR,"Ce mouvement est invalide");
         }

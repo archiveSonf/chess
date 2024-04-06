@@ -106,7 +106,13 @@ void clearScreen(){
 
 void init(){
   clearScreen();
-  draw(1,"Bonjour Monde !");
+  start_style(cG,sans_fond);
+  draw(1,"++ CHESS ON TERMINAL ++");
+  end_style();
+}
+
+void Init(){
+  clearScreen();
 }
 
 int getKey(){

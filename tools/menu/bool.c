@@ -5,8 +5,6 @@
 
 //Permet de proposer deux options
 options select_bool(char q[],option opts[2]){
-  CurserPos.col=0;
-  CurserPos.row++;
   draw(1,"%s : ",q);
   start_style(cB,sans_fond);
   draw(0,"%s",opts[0].txt);

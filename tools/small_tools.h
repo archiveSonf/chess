@@ -10,9 +10,8 @@ typedef enum {
   MSG_SUCCESS
 } MSG_TYPE;
 
-//Permet d'initialiser l'environnement
+void Init();
 void init();
-//Permet de terminer l'environnement
 void end();
 
 //Permet de récupérer la touche du clavier pressée

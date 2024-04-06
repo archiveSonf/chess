@@ -36,33 +36,41 @@ void play(){
 }
 
 void runGame(GAME *game,Joueur *player1,Joueur *player2){
-  int _plateau[8][8]={
-	  {ctb, ccb, cfb, cdb, crb, cfb, ccb, ctb},
-	  {cpb, cpb, cpb, cpb, cpb, cpb, cpb, cpb},
-	  {cv, cv, cv, cv, cv, cv, cv, cv},
-	  {cv, cv, cv, cv, cv, cv, cv, cv},
-	  {cv, cv, cv, cv, cv, cv, cv, cv},
-	  {cv, cv, cv, cv, cv, cv, cv, cv},
-	  {cpn, cpn, cpn, cpn, cpn, cpn, cpn, cpn},
-	  {ctn, ccn, cfn, cdn, crn, cfn, ccn, ctn}};
-  memcpy(plateau,_plateau,sizeof(_plateau));
-
   clearScreen();
   
   if(game==NULL){
     time_t t=time(NULL);
     struct tm tm=*localtime(&t);
-    int id=tm.tm_year+1900+tm.tm_mon+tm.tm_mday+tm.tm_hour+tm.tm_min+tm.tm_sec;
+    int id=tm.tm_year+tm.tm_mon+tm.tm_mday+tm.tm_hour+tm.tm_min+tm.tm_sec;
     Game.id=id;
     Game.players.player1=player1;
     Game.players.player2=player2;
     Game.nombre_de_coup=0;
     Game.vainqueur=NULL;
     Game.last_hit=NULL;
+
+    int _plateau[8][8]={
+	    {ctb, ccb, cfb, cdb, crb, cfb, ccb, ctb},
+	    {cpb, cpb, cpb, cpb, cpb, cpb, cpb, cpb},
+	    {cv, cv, cv, cv, cv, cv, cv, cv},
+	    {cv, cv, cv, cv, cv, cv, cv, cv},
+	    {cv, cv, cv, cv, cv, cv, cv, cv},
+	    {cv, cv, cv, cv, cv, cv, cv, cv},
+	    {cpn, cpn, cpn, cpn, cpn, cpn, cpn, cpn},
+	    {ctn, ccn, cfn, cdn, crn, cfn, ccn, ctn}};
+    memcpy(plateau,_plateau,sizeof(_plateau));
     memcpy(Game.plateau,plateau,sizeof(plateau));
   }else{
     Game=*game;
+    memcpy(plateau,Game.plateau,sizeof(Game.plateau));
   }
+
+  //place titre de partie
+  CurserPos.col=plateau_col+1;
+  CurserPos.row=plateau_row-3;
+  start_style(cB,sans_fond);
+  draw(1,"Identifiant de partie: %d",Game.id);
+  end_style();
 
   //place le tableau  
   drawplateau(plateau);
@@ -81,6 +89,7 @@ void runGame(GAME *game,Joueur *player1,Joueur *player2){
   draw(1,"%s",player1->pseudo);
   CurserPos.col=zone_old_hit_col+15;
   draw(1,"    ");
+  start_style(cC,sans_fond);
   draw(0,"%s",player2->pseudo);
   end_style();
 
@@ -104,6 +113,7 @@ void runGame(GAME *game,Joueur *player1,Joueur *player2){
           do{
             _k=getKey();
           }while(_k!='O'&&_k!='N');
+          keyCode=key_enter;
           if(_k=='O'){
             out=1;
           }
@@ -113,6 +123,7 @@ void runGame(GAME *game,Joueur *player1,Joueur *player2){
           do{
             _k=getKey();
           }while(_k!='O'&&_k!='N');
+          keyCode=key_enter;
           if(_k=='O'){
             runGame(NULL,player1,player2);
           }
@@ -122,8 +133,12 @@ void runGame(GAME *game,Joueur *player1,Joueur *player2){
           do{
             _k=getKey();
           }while(_k!='O'&&_k!='N');
+          keyCode=key_enter;
           if(_k=='O'){
-            SaveGame("../assets/games.db.json");
+            int res=SaveGame("../assets/games.db.json");
+            if(res){
+              send_msg(MSG_SUCCESS,"Partie sauvegardée");
+            }
           }
           break;
         case 'C':
@@ -131,6 +146,7 @@ void runGame(GAME *game,Joueur *player1,Joueur *player2){
           do{
             _k=getKey();
           }while(_k!='O'&&_k!='N');
+          keyCode=key_enter;
           if(_k=='O'){
             //TODO: charger une partie
           }
