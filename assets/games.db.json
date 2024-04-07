@@ -3,12 +3,12 @@
     "id": 195,
     "player1": {
       "id": 1,
-      "pseudo": "Joueur1",
+      "pseudo": "John",
       "score": 0
     },
     "player2": {
       "id": 2,
-      "pseudo": "Joueur2",
+      "pseudo": "Doe",
       "score": 0
     },
     "nombre_de_coup": 1,
@@ -99,7 +99,7 @@
       {
         "numero_coup": 1,
         "hit": "f7g1",
-        "note": 0.77000000000000002
+        "note": 22
       }
     ]
   },
@@ -107,12 +107,12 @@
     "id": 186,
     "player1": {
       "id": 1,
-      "pseudo": "Joueur1",
+      "pseudo": "Capuccino",
       "score": 0
     },
     "player2": {
       "id": 2,
-      "pseudo": "Joueur2",
+      "pseudo": "Kong fu",
       "score": 0
     },
     "nombre_de_coup": 1,

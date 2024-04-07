@@ -151,5 +151,6 @@ void send_msg(MSG_TYPE type,char *msg){
 }
 
 void end(){
-  printf("\n\n");
+  system("clear");
+  exit(0);
 }

@@ -2,6 +2,10 @@
 #include "move.h"
 #include "case.h"
 
+#ifndef _ASSETS
+#define BD_GAMES "../dist/games.db.json"
+#endif
+
 #ifndef PlateauPosition 
 #define plateau_col 0 
 #define plateau_row 4 
@@ -17,7 +21,7 @@ extern int plateau[8][8];
 
 typedef struct{
   int id;
-  char pseudo[8];
+  char pseudo[11];
   int score;
 } Joueur;
 
@@ -57,3 +61,9 @@ void runGame(GAME *game,Joueur *player1, Joueur *player2);
 
 //Dessine le tableau
 void drawplateau (int plateau[8][8]);
+
+// Charge une partie
+GAME *LoadGame(int id,char *db_file);
+
+//Retourne la liste des parties
+Partie *LoadGames(char *db_file,int *nb_partie);
