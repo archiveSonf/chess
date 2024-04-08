@@ -137,9 +137,11 @@ GAME *LoadGame(int id,char *db_file){
   if(db_games&&json_is_array(db_games)){
     size_t i;
     json_t *value;
+    int trouve=0;
     json_array_foreach(db_games,i,value){
       int _id=json_integer_value(json_object_get(value,"id"));
       if(id==_id){
+        trouve=1;
         game->id=id;
         game->nombre_de_coup=json_integer_value(json_object_get(value,"nombre_de_coup"));
         
@@ -194,6 +196,9 @@ GAME *LoadGame(int id,char *db_file){
         }
         break;
       }
+    }
+    if(!trouve){
+      game=NULL;
     }
   }else{
     game=NULL;
