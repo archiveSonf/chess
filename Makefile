@@ -12,3 +12,8 @@ files=src/index.c tools/menu/*.c tools/board/*.c tools/*.c
 
 compil: $(files) ##(files:optionnel) Compile les fichiers spécifiers en un fichier éxecutables chess.exe
 	gcc -o dist/chess.exe $(files) -lm -ljansson
+
+install: ##Installe les dépendances
+	sudo apt update
+	sudo apt upgrade
+	sudo apt-get install libjansson-dev
