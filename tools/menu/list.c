@@ -1,21 +1,21 @@
 #include <stdio.h>
 #include "../env.h"
-#include "../small_tools.h"
-#include "../style.h"
 #include "menu.h"
 
 //Permet de proposer plusieurs options
-enum options select_list(char* q,int nbr_opts,struct option opts[]){
-  CurserPos.row++;
-  CurserPos.col=0;
+options select_list(char* q,int nbr_opts,option opts[]){
   int first_row=CurserPos.row+2,
       last_row=first_row+nbr_opts-1;
-  draw(1,"%s :\n\n", q);
+
+  start_style(cG,sans_fond);
+  draw(1,"++ %s ++", q);
+  CurserPos.row+=2;
   start_style(cB,sans_fond);
-  draw(0,"%s %s\n",this,opts[0].txt);
+  draw(1,"%s %s",this,opts[0].txt);
   end_style();
   for(int i=1;i<nbr_opts;i++){
-    draw(0,"  %s\n",opts[i].txt);
+    CurserPos.row++;
+    draw(1,"  %s",opts[i].txt);
   }
   CurserPos.row=first_row;
 
@@ -43,6 +43,6 @@ enum options select_list(char* q,int nbr_opts,struct option opts[]){
   }
   
   CurserPos.row=last_row+1;
-  CurserPos.col=0;
+
   return opts[choice].id;
 }

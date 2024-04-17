@@ -1,14 +1,10 @@
 #include <stdio.h>
 #include <string.h>
-#include "../style.h"
-#include "../small_tools.h"
 #include "../env.h"
 #include "menu.h"
 
 //Permet de proposer deux options
-enum options select_bool(char q[],struct option opts[2]){
-  CurserPos.col=0;
-  CurserPos.row++;
+options select_bool(char q[],option opts[2]){
   draw(1,"%s : ",q);
   start_style(cB,sans_fond);
   draw(0,"%s",opts[0].txt);

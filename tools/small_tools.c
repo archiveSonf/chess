@@ -3,7 +3,6 @@
 #include <termios.h>
 #include <unistd.h>
 #include "env.h"
-#include "style.h"
 #include <string.h>
 #include <math.h>
 #include <stdlib.h>
@@ -54,13 +53,11 @@ void draw(int move,const char *str, ...){
           num_digits=floor(log10(abs(val)))+1;
         }
         CurserPos.X+=num_digits;
-      }else if(*str=='l'){
-        str++;
+      }else if(*str=='.'){
+        str+=4;
         double val=va_arg(args,double);
-        printf("%lf",val);
-        char num_digits[20];
-        sprintf(num_digits,"%lf",val);
-        CurserPos.X+=strlen(num_digits);
+        printf("%.2lf",val);
+        CurserPos.X+=4;
       }else if(*str=='c'){
         char val=va_arg(args,int);
         printf("%c",val);
@@ -70,8 +67,7 @@ void draw(int move,const char *str, ...){
         while(*val){
           if(*val=='\b'){
             CurserPos.X-=1;
-          }
-          if(*val=='\n'){
+          }else if(*val=='\n'){
             CurserPos.Y++;
             CurserPos.X=0;
           }
@@ -87,8 +83,7 @@ void draw(int move,const char *str, ...){
 
     if(*str=='\b'){
       CurserPos.X-=1;
-    }
-    if(*str=='\n'){
+    }else if(*str=='\n'){
       CurserPos.Y++;
       CurserPos.X=0;
     }
@@ -111,7 +106,13 @@ void clearScreen(){
 
 void init(){
   clearScreen();
-  draw(1,"Bonjour Monde !");
+  start_style(cG,sans_fond);
+  draw(1,"++ CHESS ON TERMINAL ++");
+  end_style();
+}
+
+void Init(){
+  clearScreen();
 }
 
 int getKey(){
@@ -123,6 +124,30 @@ int getKey(){
   int k=getchar();
   tcsetattr(STDIN_FILENO,TCSANOW,&oldt);
   return k;
+}
+
+void send_msg(MSG_TYPE type,char *msg){
+  char *color;
+  switch(type){
+    case MSG_INFO:
+      color=cW0;
+      break;
+    case MSG_ERROR:
+      color=cR;
+      break;
+    case MSG_WARNING:
+      color=cY;
+      break;
+    case MSG_SUCCESS:
+      color=cG;
+      break;
+  }
+  CurserPos.col=zone_msg_col;
+  CurserPos.row=zone_msg_row;
+  draw(1,"                                                  ");
+  start_style(color,sans_fond);
+  draw(1,"%s",msg);
+  end_style();
 }
 
 void end(){

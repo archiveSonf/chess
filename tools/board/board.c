@@ -1,118 +1,161 @@
 #include "board.h"
-#include "./case.h"
-#include "../style.h"
 #include "../env.h"
-#include "../small_tools.h"
 #include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#include <string.h>
 
-#ifndef PlateauPosition 
-#define plateau_col 0 
-#define plateau_row 2 
-#endif
+GAME Game = {0,{NULL,NULL},0,NULL,NULL,{{}}};
+int plateau[8][8];
 
-int plateau[8][8] = {
-		{ctb, ccb, cfb, cdb, crb, cfb, ccb, ctb},
-		{cpb, cpb, cpb, cpb, cpb, cpb, cpb, cpb},
-		{cv, cv, cv, cv, cv, cv, cv, cv},
-		{crn, cv, cv, cv, cv, cv, cv, cv},
-		{cv, cv, cv, cv, cv, cv, cv, cv},
-		{cv, cv, cv, cv, cv, cv, cv, cv},
-		{cpn, cpn, cpn, cpn, cpn, cpn, cpn, cpn},
-		{ctn, ccn, cfn, cdn, crn, cfn, ccn, ctn}};
 
-void drawplateau(int plateau[8][8])
-{
-	//for (int i = 1; i < 9; i++)
-	//{
-	//	for (int j = 1; j < 9; j++)
-	//	{
-	//		CurserPos.row = largeur_case * (i - 1) + 2;
-	//		CurserPos.col = longueur_case * (j - 1) + 1;
-	//		if (((i % 2 == 0 && j % 2 == 0) || (i % 2 != 0 && j % 2 != 0)))
-	//		{
-	//			for (int m = 0; m < largeur_case; m++)
-	//			{
-	//				int move = 1;
-	//				for (int n = 0; n < longueur_case; n++)
-	//				{
-	//					start_style(cG, sC);
-	//					draw(move, "1");
-	//					move = 0;
-	//				}
-	//				CurserPos.row++;
-	//			}
-	//		}
-//
-    //        else{
-    //            for (int u=0;u<largeur_case;u++){
-    //                int move=1;
-    //                for(int v=0;v<longueur_case;v++){
-    //                    start_style(cG,sG);
-    //                    draw(move,"1");
-    //                    move=0;
-    //                }
-    //                CurserPos.row++;
-    //        }
-    //    }
-    //}
-    //}
-
-    //for(int i=0; i <4;i++){
-    //    for (int k=0; k<largeur_case;k++){
-    //        for(int j=0;j<4;j++){
-    //        for(int m=0;m<longueur_case;m++){
-    //            start_style(cG,sW);
-    //            draw(0,"  ");
-    //        }
-    //        for(int n=0;n<longueur_case;n++){
-    //            start_style(cB,sC);
-    //            draw(0,"  ");
-    //        }
-    //    }
-    //    draw(0,"\n");
-//
-    //    }
-    //    for (int k=0; k<largeur_case;k++){
-    //        for(int j=0;j<4;j++){
-    //        for(int m=0;m<longueur_case;m++){
-    //            start_style(cB,sC);
-    //            draw(0,"  ");
-    //        }
-    //        for(int n=0;n<longueur_case;n++){
-    //            start_style(cG,sW);
-    //            draw(0,"  ");
-    //        }
-    //    }
-    //    draw(0,"\n");
-//
-    //    }
-    //}
-    //CurserPos.row = 1;
-    //CurserPos.col = 0;
-    //draw(1,"♜") ;
-    ////drawpion(plateau[0][0],1,1,sW);
-    ////printf("\n");
-    //CurserPos.row = 20;
-    //CurserPos.col = 0;
-    //draw(1,"");
-
-    CurserPos.row = plateau_row;
-    CurserPos.col = plateau_col;
-
-    draw(1,"");
-    int num = 8;
-    for (int i=0; i<8;i++){
-        printf("%d ",num);
-        for (int j=0; j<8;j++){
-            drawpion(plateau[i][j], i , j);
-        }
-        printf("\n");
-        num--;
+void drawplateau(int plateau[8][8]){
+  CurserPos.row = plateau_row;
+  CurserPos.col = plateau_col;
+  draw(1,"");
+  int num = 8;
+  for (int i=0; i<8;i++){
+    draw(0,"%d ",num);
+    for (int j=0; j<8;j++){
+        drawpion(plateau[i][j], i , j);
     }
-    printf("   a   b   c   d   e   f   g   h \n");
-    
-    
-    
+    draw(0,"\n");
+    num--;
+  }
+  draw(0,"   a   b   c   d   e   f   g   h \n");
 }
     
-	
+joueur j = player1;
+void play(){
+  Move mv=getMove(j);
+  plateau[mv.from.y][mv.from.x]=plateau[mv.to.y][mv.to.x];
+  plateau[mv.to.y][mv.to.x]=cv;
+  metamorphose();
+  //TODO: fonction d'évolution du pion
+  drawplateau(plateau);
+  write_hit(mv.string);
+  j=j==player1?player2:player1;
+}
+
+void runGame(GAME *game,Joueur *player1,Joueur *player2){
+  clearScreen();
+  
+  if(game==NULL){
+    time_t t=time(NULL);
+    struct tm tm=*localtime(&t);
+    int id=tm.tm_year+tm.tm_mon+tm.tm_mday+tm.tm_hour+tm.tm_min+tm.tm_sec;
+    Game.id=id;
+    Game.players.player1=player1;
+    Game.players.player2=player2;
+    Game.nombre_de_coup=0;
+    Game.vainqueur=NULL;
+    Game.last_hit=NULL;
+
+    int _plateau[8][8]={
+	    {ctb, ccb, cfb, cdb, crb, cfb, cv, ctb},
+	    {cpb, cpb, cpb, cv, cv, cpb, cpn, cpb},
+	    {cv, cv, cv, cv, cv, cv, cv, cv},
+	    {cv, ccn, cv, cv, cv, cv, cv, cv},
+	    {cv, cv, cv, cv, cv, cv, cv, cv},
+	    {cv, cv, cv, cv, cv, cv, cv, cv},
+	    {cpn, cpn, cpn, cv, cv, cpn, cpb, cpn},
+	    {ctn, ccn, cfn, cdn, crn, cfn, ccn, ctn}};
+    memcpy(plateau,_plateau,sizeof(_plateau));
+    memcpy(Game.plateau,plateau,sizeof(plateau));
+  }else{
+    Game=*game;
+    memcpy(plateau,Game.plateau,sizeof(Game.plateau));
+  }
+
+  //place titre de partie
+  CurserPos.col=plateau_col+1;
+  CurserPos.row=plateau_row-3;
+  start_style(cB,sans_fond);
+  draw(1,"Identifiant de partie: %d",Game.id);
+  end_style();
+
+  //place le tableau  
+  drawplateau(plateau);
+
+  //place la zone de move
+  CurserPos.col=zone_mv_col-6;
+  CurserPos.row=zone_mv_row;
+  start_style(cB,sans_fond);
+  draw(1,"Move:");
+  end_style();
+
+  //place la zone de coup
+  CurserPos.col=zone_old_hit_col;
+  CurserPos.row=zone_old_hit_row-1;
+  start_style(cP,sans_fond);
+  draw(1,"%s",player1->pseudo);
+  CurserPos.col=zone_old_hit_col+15;
+  draw(1,"    ");
+  start_style(cC,sans_fond);
+  draw(0,"%s",player2->pseudo);
+  end_style();
+
+  //place la zone des options
+  CurserPos.col=zone_options_col;
+  CurserPos.row=zone_options_row;
+  start_style(cW0,sans_fond);
+  draw(1,"Enter: Continuer|valider; Q: Quitter;  R: Recommencer;  S: Sauvegarder;  C: Charger");
+
+  //TODO: boucle de jeu
+  char keyCode;
+  int out=0;
+  while(!out){
+    play();
+    do{
+      keyCode=getKey();
+      char _k;
+      switch(keyCode){
+        case 'Q':
+          send_msg(MSG_WARNING,"O: confirmer; N: annuler");
+          do{
+            _k=getKey();
+          }while(_k!='O'&&_k!='N');
+          keyCode=key_enter;
+          if(_k=='O'){
+            out=1;
+          }
+          break;
+        case 'R':
+          send_msg(MSG_WARNING,"O: confirmer; N: annuler");
+          do{
+            _k=getKey();
+          }while(_k!='O'&&_k!='N');
+          keyCode=key_enter;
+          if(_k=='O'){
+            runGame(NULL,player1,player2);
+          }
+          break;
+        case 'S':
+          send_msg(MSG_WARNING,"O: confirmer; N: annuler");
+          do{
+            _k=getKey();
+          }while(_k!='O'&&_k!='N');
+          keyCode=key_enter;
+          if(_k=='O'){
+            int res=SaveGame("../assets/games.db.json");
+            if(res){
+              send_msg(MSG_SUCCESS,"Partie sauvegardée");
+            }
+          }
+          break;
+        case 'C':
+          send_msg(MSG_WARNING,"O: confirmer; N: annuler");
+          do{
+            _k=getKey();
+          }while(_k!='O'&&_k!='N');
+          keyCode=key_enter;
+          if(_k=='O'){
+            //TODO: charger une partie
+          }
+          break;
+      }
+    }while(keyCode!=key_enter);
+  }
+
+  //TODO: fin de jeu; lancer le menu
+}

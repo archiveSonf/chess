@@ -1,36 +1,52 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include "../tools/env.h"
-#include "../tools/style.h"
-#include "../tools/small_tools.h"
 #include "../tools/menu/menu.h"
 #include "../tools/board/board.h"
-#include "../tools/board/move.h"
 
+void menu(){
+  init();
+  option opts[5]={
+    {run_game,"Lancer une partie"},
+    {load_game,"Charger une partie"},
+    {analyz_old_game,"Analyser les anciennes parties"},
+    {see_scores,"Voir le tableau des scores"},
+    {quitter,"Quitter le jeu"}
+  };
+  CurserPos.row+=2;
+  CurserPos.col=4;
+  options res=select_list("Menu",5,opts);
+
+  switch(res){
+    case run_game:
+      init();
+      CurserPos.row++;
+      CurserPos.col=4;
+      res=select_bool("Quels types de partie voulez-vous jouer ?",
+        (option[2]){{run_game_2,"2 joueurs"},{run_game_ia,"contre IA"}});
+      if(res==run_game_2){
+        runGame(NULL,&(Joueur){1,"Joueur1",0},&(Joueur){2,"Joueur2",0});
+      }else{
+
+      }
+      break;
+    case load_game:
+      break;
+    case analyz_old_game:
+      break;
+    case see_scores:
+      break;
+    case quitter:
+      //system("ctrl+z");
+      break;
+  }
+  
+}
 
 void main(){
-  init();
-  //CurserPos.row++;
-  //CurserPos.col=0;
-  //draw(1,"%s %s %s %s %s %s\n",roi,dame,tour,fou,cavalier,pion);
-  //enum options res=select_bool("Sélectionne une option",(struct option[2]){{run_game_ia,"option1"},{run_game_2,"option2"}});
-  //CurserPos.row++;
-  //CurserPos.col=0;
-  //draw(1,"Vous avez choisi %d",res);
-//
-  //res=select_list("Sélectionne une option",7,
-  //  (struct option[7]){{run_game,"option1"},{run_game_ia,"option2"},{run_game_2,"option3"},{save_game,"option4"},{analyz_old_game,"option5"},{see_scores,"option6"},{quitter,"option7"}});
-//
-  //CurserPos.row++;
-  //CurserPos.col=0;
-  //draw(1,"Vous avez choisi %d",res);
+  Init();
 
-  //struct Move mv=doMove(blanc);
-  //CurserPos.row++;
-  //CurserPos.col=0;
-  //draw(1,"Vous avez choisi %d %d %d %d",mv.to.x,mv.to.y,mv.from.x,mv.from.y);
-  //drawplateau(plateau);
-  //printf("\x1b[9;1;t");
-  //path_piece(3,0);
-  printf("\n%d",coup_valide(3,0,2,0));
+  menu();
+
   end();
 }

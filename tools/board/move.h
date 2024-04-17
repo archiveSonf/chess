@@ -1,18 +1,24 @@
+#ifndef ZONE_MOVE 
+#define zone_mv_col 16 /*Colonne de la zone de rédaction du mouvement*/
+#define zone_mv_row 16 /*Ligne de la zone de rédaction du mouvement*/
+#endif
+
 //Coordonnées sur la plateau
 
-struct _coord{
+typedef struct {
   int x;
   int y;
-};
-struct Move{
-  char string[4];
-  struct _coord to;
-  struct _coord from;
-};
+} coord;
+
+typedef struct {
+  char *string;
+  coord to;
+  coord from;
+} Move;
 
 //Joueur
-enum Joueur{blanc,noir};
+typedef enum {player1,player2} joueur;
 
 //Effectuer un mouvement
-struct Move getMove(enum Joueur joueur);
+Move getMove(joueur joueur);
 

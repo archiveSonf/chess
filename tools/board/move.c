@@ -1,14 +1,8 @@
 #include "board.h"
-#include "move.h"
-#include "../style.h"
-#include "../small_tools.h"
 #include "../env.h"
 #include <string.h>
-
-#ifndef ZONE_MOVE 
-#define zone_mv_col 16 /*Colonne de la zone de rédaction du mouvement*/
-#define zone_mv_row 16 /*Ligne de la zone de rédaction du mouvement*/
-#endif
+#include <stdlib.h>
+#include <stdio.h>
 
 enum State{
   Valid,
@@ -17,10 +11,13 @@ enum State{
 };
 
 //Présentation du move
-void output(char _move[4],enum State state){
+void output(char _move[4],enum State state,joueur j){
   CurserPos.row=zone_mv_row;
   CurserPos.col=zone_mv_col;
-  char* background=sC;
+  char* background=sP;
+  if(j==1){
+    background=sC;
+  }
   if(state==Valid){
     background=sG;
   }else if(state==InValid){
@@ -43,36 +40,41 @@ int verifInput(int type,char keyCode){
 }
 
 //Effectuer un mouvement
-struct Move getMove(enum Joueur joueur){
+Move getMove(joueur joueur){
   int isValide=0;
   char _move[4]="    ";
-  struct Move mv;
-  output(_move,Neutral);
+  Move mv;
+  output(_move,Neutral,joueur);
+  send_msg(MSG_INFO,"Entrez le mouvement");
   for(int i=0;i<5;i++){
     char key;
     if(i<4){
       do{
         key=(char)getKey();
         _move[i]=' ';
-        output(_move,Neutral);
+        output(_move,Neutral,joueur);
+        send_msg(MSG_INFO,"Entrez le mouvement");
+
         if(key==backspace){
           i=i-1==-1?0:i-1;
           _move[i]=' ';
-          output(_move,Neutral);
+          output(_move,Neutral,joueur);
+          send_msg(MSG_INFO,"Entrez le mouvement");
         }
       }while(verifInput(i%2,key));
       _move[i]=key;
-      output(_move,Neutral);
+      output(_move,Neutral,joueur);
+      send_msg(MSG_INFO,"Entrez le mouvement");
       if(i==1){
-        int _case=plateau[(int)_move[1]-49][(int)_move[0]-97];
+        int _case=plateau[56-(int)_move[1]][(int)_move[0]-97];
         if(_case==cv){
-          output(_move,InValid);
+          output(_move,InValid,joueur);
           i--;
-          //TODO: Afficher un message d'erreur (Case vide)
+          send_msg(MSG_ERROR,"Cette case est vide");
         }else if(_case%2!=joueur){
-          output(_move,InValid);
+          output(_move,InValid,joueur);
           i--;
-          //TODO: Afficher un message d'erreur (Ce n'est pas votre pièce)
+          send_msg(MSG_ERROR,"Cette figurine ne vous appartient pas");
         }
       }
     }else{
@@ -81,21 +83,36 @@ struct Move getMove(enum Joueur joueur){
         if(key==backspace){
           i=2;
           _move[3]=' ';
-          output(_move,Neutral);
+          output(_move,Neutral,joueur);
+          send_msg(MSG_INFO,"Entrez le mouvement");
         }
       }while(key!=key_enter&&key!=backspace);
       if(key==key_enter){
-        int _to=plateau[(int)_move[1]-49][(int)_move[0]-97];
-        int _from=plateau[(int)_move[3]-49][(int)_move[2]-97];
-        int verif=1;//TODO: Vérifier si le mouvement est valide
-        if(verif){
-          output(_move,Valid);
-          mv=(struct Move){{_move[0],_move[1],_move[2],_move[3]},
-            {(int)_move[0]-97,(int)_move[1]-49},
-            {(int)_move[2]-97,(int)_move[3]-49}};
-        }else{
-          output(_move,InValid);
+        //int _to=plateau[(int)_move[1]-49][(int)_move[0]-97];
+        //int _from=plateau[(int)_move[3]-49][(int)_move[2]-97];
+
+        int mvtV = coup_valide(56-(int)_move[1],(int)_move[0]-97,56-(int)_move[3],(int)_move[2]-97);
+        int roi_warning=Leroi(56-(int)_move[1],(int)_move[0]-97,56-(int)_move[3],(int)_move[2]-97);
+        //CurserPos.row=25;
+        //CurserPos.col = 0;
+        //draw(1,"%d",metamorphose);
+
+        if(!mvtV){
+          output(_move,InValid,joueur);
           i=2;
+          send_msg(MSG_ERROR,"Ce mouvement est invalide");
+        }else if(roi_warning){
+          output(_move,InValid,joueur);
+          i=2;
+          send_msg(MSG_ERROR,"Votre roi est en danger !");
+        }else if(mvtV && !roi_warning){
+          output(_move,Valid,joueur);
+          send_msg(MSG_SUCCESS,"Mouvement valide");
+          mv=(Move){NULL,
+            {(int)_move[0]-97,56-(int)_move[1]},
+            {(int)_move[2]-97,56-(int)_move[3]}};
+          mv.string=malloc(4*sizeof(char));
+          strcpy(mv.string,_move);
         }
       }
     }
