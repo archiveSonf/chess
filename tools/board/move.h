@@ -17,7 +17,7 @@ typedef struct {
 } Move;
 
 //Joueur
-typedef enum {player1,player2} joueur;
+typedef enum {joueur1,joueur2} joueur;
 
 //Effectuer un mouvement
 Move getMove(joueur joueur);

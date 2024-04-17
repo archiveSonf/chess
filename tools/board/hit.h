@@ -16,6 +16,7 @@ typedef struct _partie{
   char* player1;
   char* player2;
   struct _partie *next;
+  struct _partie *previous;
 } Partie;
 
 
@@ -24,8 +25,3 @@ void write_hit(char *hit);
 
 // Sauvegarde les coups joués dans la partie
 int SaveGame(char *db_file);
-
-// Charge une partie
-//GAME *LoadGame(int id,char *db_file);
-//
-//Partie *LoadGames(char *db_file);

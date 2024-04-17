@@ -25,8 +25,7 @@ void drawplateau(int plateau[8][8]){
   draw(0,"   a   b   c   d   e   f   g   h \n");
 }
     
-joueur j = player1;
-void play(){
+void play(joueur j){
   Move mv=getMove(j);
   plateau[mv.from.y][mv.from.x]=plateau[mv.to.y][mv.to.x];
   plateau[mv.to.y][mv.to.x]=cv;
@@ -34,7 +33,6 @@ void play(){
   //TODO: fonction d'évolution du pion
   drawplateau(plateau);
   write_hit(mv.string);
-  j=j==player1?player2:player1;
 }
 
 void runGame(GAME *game,Joueur *player1,Joueur *player2){
@@ -65,6 +63,8 @@ void runGame(GAME *game,Joueur *player1,Joueur *player2){
   }else{
     Game=*game;
     memcpy(plateau,Game.plateau,sizeof(Game.plateau));
+    player1=Game.players.player1;
+    player2=Game.players.player2;
   }
 
   //place titre de partie
@@ -99,13 +99,18 @@ void runGame(GAME *game,Joueur *player1,Joueur *player2){
   CurserPos.col=zone_options_col;
   CurserPos.row=zone_options_row;
   start_style(cW0,sans_fond);
-  draw(1,"Enter: Continuer|valider; Q: Quitter;  R: Recommencer;  S: Sauvegarder;  C: Charger");
+  draw(1,"Enter: Continuer|valider; Q: Quitter;  R: Recommencer;  S: Sauvegarder");
 
   //TODO: boucle de jeu
+  joueur j=joueur1;
+  if(Game.nombre_de_coup%2==1){
+    j=joueur2;
+  }
   char keyCode;
   int out=0;
   while(!out){
-    play();
+    play(j);
+    j=j==joueur1?joueur2:joueur1;
     do{
       keyCode=getKey();
       char _k;
@@ -137,20 +142,10 @@ void runGame(GAME *game,Joueur *player1,Joueur *player2){
           }while(_k!='O'&&_k!='N');
           keyCode=key_enter;
           if(_k=='O'){
-            int res=SaveGame("../assets/games.db.json");
+            int res=SaveGame(BD_GAMES);
             if(res){
               send_msg(MSG_SUCCESS,"Partie sauvegardée");
             }
-          }
-          break;
-        case 'C':
-          send_msg(MSG_WARNING,"O: confirmer; N: annuler");
-          do{
-            _k=getKey();
-          }while(_k!='O'&&_k!='N');
-          keyCode=key_enter;
-          if(_k=='O'){
-            //TODO: charger une partie
           }
           break;
       }
