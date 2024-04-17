@@ -21,7 +21,7 @@ extern int plateau[8][8];
 
 typedef struct{
   int id;
-  char pseudo[11];
+  char pseudo[10];
   int score;
 } Joueur;
 
