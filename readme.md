@@ -57,7 +57,8 @@ option bools[2]={
 
 options res=select_bool("Quels types de partie voulez-vous jouer ?",bools);
 
-//options est un type d'enumérateur prenant entre autre les valeurs run_game_2 et run_game_ia
+//options est un type d'enumérateur, 
+//prenant entre autre les valeurs run_game_2 et run_game_ia
 ```
 
 ### [`select_list`](https://github.com/archiveSonf/chess/blob/chess/tools/menu/list.c)
@@ -75,7 +76,8 @@ option opts[5]={
 
 options res=select_list("Menu",5,opts);
 
-//options est un type d'enumérateur prenant entre autre les valeurs run_game et quitter
+//options est un type d'enumérateur, 
+//prenant entre autre les valeurs run_game et quitter
 ```
 
 ### [`select_partie`](https://github.com/archiveSonf/chess/blob/chess/tools/menu/list.c)

@@ -9,8 +9,8 @@ joueur player= joueur1;
 void write_hit(char *hit){
   Hit *new_hit=malloc(sizeof(Hit));
   new_hit->player=player;
+  new_hit->note=note(player);
   player=player==joueur1?joueur2:joueur1;
-  new_hit->note=77;//TODO: convertir le coup en note
   new_hit->numero_coup=++Game.nombre_de_coup;
   new_hit->hit=hit;
   new_hit->previous_hit=Game.last_hit;

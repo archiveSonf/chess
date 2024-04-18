@@ -26,6 +26,7 @@ void drawplateau(int plateau[8][8]){
     
 void play(joueur j){
   Move mv=getMove(j);
+  memcpy(old_plateau,plateau,sizeof(plateau));
   plateau[mv.from.y][mv.from.x]=plateau[mv.to.y][mv.to.x];
   plateau[mv.to.y][mv.to.x]=cv;
   metamorphose();
@@ -48,13 +49,13 @@ void runGame(GAME *game,Joueur *player1,Joueur *player2){
     Game.last_hit=NULL;
 
     int _plateau[8][8]={
-	    {ctb, ccb, cfb, cdb, crb, cfb, cv, ctb},
-	    {cpb, cpb, cpb, cv, cv, cpb, cpn, cpb},
-	    {cv, cv, cv, cv, cv, cv, cv, cv},
-	    {cv, ccn, cv, cv, cv, cv, cv, cv},
+	    {ctb, ccb, cfb, cdb, crb, cfb, ccb, ctb},
+	    {cpb, cpb, cpb, cpb, cpb, cpb, cpb, cpb},
 	    {cv, cv, cv, cv, cv, cv, cv, cv},
 	    {cv, cv, cv, cv, cv, cv, cv, cv},
-	    {cpn, cpn, cpn, cv, cv, cpn, cpb, cpn},
+	    {cv, cv, cv, cv, cv, cv, cv, cv},
+	    {cv, cv, cv, cv, cv, cv, cv, cv},
+	    {cpn, cpn, cpn, cpn, cpn, cpn, cpn, cpn},
 	    {ctn, ccn, cfn, cdn, crn, cfn, ccn, ctn}};
     memcpy(plateau,_plateau,sizeof(_plateau));
     memcpy(Game.plateau,plateau,sizeof(plateau));
@@ -99,7 +100,6 @@ void runGame(GAME *game,Joueur *player1,Joueur *player2){
   start_style(cW0,sans_fond);
   draw(1,"Enter: Continuer|valider; Q: Quitter;  R: Recommencer;  S: Sauvegarder");
 
-  //TODO: boucle de jeu
   joueur j=joueur1;
   if(Game.nombre_de_coup%2==1){
     j=joueur2;
@@ -150,5 +150,5 @@ void runGame(GAME *game,Joueur *player1,Joueur *player2){
     }while(keyCode!=key_enter);
   }
 
-  //TODO: fin de jeu; lancer le menu
+  //TODO: fin de jeu;
 }

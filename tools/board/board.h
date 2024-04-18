@@ -19,6 +19,7 @@
 
 //Plateau de jeu
 extern int plateau[8][8];
+extern int old_plateau[8][8];
 
 typedef struct{
   int id;
@@ -62,3 +63,6 @@ void runGame(GAME *game,Joueur *player1, Joueur *player2);
 
 //Dessine le tableau
 void drawplateau (int plateau[8][8]);
+
+//permet de noter un coup qui vient d'être éffectué
+int note(joueur j);
