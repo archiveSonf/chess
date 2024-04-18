@@ -11,6 +11,8 @@ Fonctionnalités:
 
 >Les fonctionnalités 4 et 5 ne sont pas encore implémenter.
 
+![chess0.png](img/chess0.png)
+
 Auteurs: 
 
 - [@YannDste, yannsonfack@gmail.com](https://github.com/YannDste)
@@ -39,6 +41,9 @@ make run
     - **[data](#Data)** : module contenant les méthodes d'écriture et lecture de données.
 
 ## Env
+
+
+
 ## Menu
 
 Les méthodes du module `menu` permettent de proposer des options de fonctionnalités pour qu'il les sélectionne via les touches de directions.
