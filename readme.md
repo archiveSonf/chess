@@ -40,10 +40,58 @@ make run
 
 ## Env
 ## Menu
+
+Les méthodes du module `menu` permettent de proposer des options de fonctionnalités pour qu'il les sélectionne via les touches de directions.
+
+### [`select_bool`](https://github.com/archiveSonf/chess/blob/chess/tools/menu/bool.c)
+
+Permet de proposer 2 options
+
+![select_bool.png](img/select_bool.png)
+
+```c
+option bools[2]={
+  {run_game_2,"2 joueurs"},
+  {run_game_ia,"contre IA"}
+};
+
+options res=select_bool("Quels types de partie voulez-vous jouer ?",bools);
+
+//options est un type d'enumérateur prenant entre autre les valeurs run_game_2 et run_game_ia
+```
+
+### [`select_list`](https://github.com/archiveSonf/chess/blob/chess/tools/menu/list.c)
+
+![select_list.png](img/select_list.png)
+
+```c
+option opts[5]={
+  {run_game,"Lancer une partie"},
+  {load_game,"Charger une partie"},
+  {analyz_old_game,"Analyser les anciennes parties"},
+  {see_scores,"Voir le tableau des scores"},
+  {quitter,"Quitter le jeu"}
+};
+
+options res=select_list("Menu",5,opts);
+
+//options est un type d'enumérateur prenant entre autre les valeurs run_game et quitter
+```
+
+### [`select_partie`](https://github.com/archiveSonf/chess/blob/chess/tools/menu/list.c)
+
+`select_partie` utilise une méthode du module `data` pour récupérer une liste de parties et les proposer en options
+
+![select_partie.png](img/select_partie.png)
+
+```c
+int select_partie(Partie *partie,int nbr_partie);
+```
+
 ## Board
 ## Data
 
-Les méthodes du module Data utilise la bibliothèque jansson.h pour stocker lire des données au format json.
+Les méthodes du module ``data`` utilise la bibliothèque `jansson.h` pour stocker lire des données au format json.
 
 ### [`SaveGame`](https://github.com/archiveSonf/chess/blob/chess/tools/data/save.c)
 
