@@ -1,5 +1,4 @@
-#include "./board.h"
-#include "../env.h"
+#include "../tools.h"
 
 void echec_et_mat(){
     int checkmate = 0; 

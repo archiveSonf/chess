@@ -1,12 +1,9 @@
 #include <stdio.h>
-#include "../env.h"
-#include "board.h"
 
 void backgroundcolor(char *piece, int lp,  int cp){
   if ((lp % 2 == 0 && cp % 2 == 0) || ( lp % 2 != 0 && cp % 2 != 0 )){
      printf("\033[47;30m %s  \033[0m",piece);
-  }
-  else {
+  }else{
       printf("\033[42;30m %s  \033[0m",piece);
   }
 }

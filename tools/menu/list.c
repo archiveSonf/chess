@@ -1,6 +1,5 @@
 #include <stdio.h>
-#include "../env.h"
-#include "menu.h"
+#include "../tools.h"
 
 //Permet de proposer plusieurs options
 options select_list(char* q,int nbr_opts,option opts[]){

@@ -2,7 +2,6 @@
 #include "move.h"
 #include "case.h"
 #include "path.h"
-#
 
 #ifndef _ASSETS
 #define BD_GAMES "../dist/games.db.json"
@@ -63,9 +62,3 @@ void runGame(GAME *game,Joueur *player1, Joueur *player2);
 
 //Dessine le tableau
 void drawplateau (int plateau[8][8]);
-
-// Charge une partie
-GAME *LoadGame(int id,char *db_file);
-
-//Retourne la liste des parties
-Partie *LoadGames(char *db_file,int *nb_partie);

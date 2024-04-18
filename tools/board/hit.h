@@ -11,17 +11,5 @@ typedef struct _hit{
   struct _hit *previous_hit;
 } Hit;
 
-typedef struct _partie{
-  int id;
-  char* player1;
-  char* player2;
-  struct _partie *next;
-  struct _partie *previous;
-} Partie;
-
-
 // Ecris le coup joué
 void write_hit(char *hit);
-
-// Sauvegarde les coups joués dans la partie
-int SaveGame(char *db_file);

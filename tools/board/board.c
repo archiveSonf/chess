@@ -1,5 +1,4 @@
-#include "board.h"
-#include "../env.h"
+#include "../tools.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -30,7 +29,6 @@ void play(joueur j){
   plateau[mv.from.y][mv.from.x]=plateau[mv.to.y][mv.to.x];
   plateau[mv.to.y][mv.to.x]=cv;
   metamorphose();
-  //TODO: fonction d'évolution du pion
   drawplateau(plateau);
   write_hit(mv.string);
 }

@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <string.h>
-#include "../env.h"
-#include "menu.h"
+#include "../tools.h"
 
 //Permet de proposer deux options
 options select_bool(char q[],option opts[2]){

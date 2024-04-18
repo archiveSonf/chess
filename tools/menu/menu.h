@@ -1,7 +1,3 @@
-#ifndef INDEX
-#include "../board/hit.h"
-#endif
-
 //Les différentes options possibles
 typedef enum {
   run_game, //Lancer une partie
