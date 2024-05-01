@@ -1,11 +1,9 @@
 #include "index.h"
 #include <stdio.h>
 #include <stdlib.h>
-#include "../tools/env.h"
-#include "../tools/board/board.h"
-#include "../tools/menu/menu.h"
 #include <string.h>
 #include <time.h>
+#include "../tools/tools.h"
 
 void handler(){
   int quit=0;

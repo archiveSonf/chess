@@ -1,7 +1,6 @@
-#include "./board.h"
 #include <stdio.h>
 #include <stdlib.h>
-#include "../env.h"
+#include "../tools.h"
 
 
 #define max_cases_jouables 28

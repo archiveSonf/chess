@@ -1,5 +1,4 @@
-#include "board.h"
-#include "../env.h"
+#include "../tools.h"
 #include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
@@ -45,7 +44,7 @@ Move getMove(joueur joueur){
   char _move[4]="    ";
   Move mv;
   output(_move,Neutral,joueur);
-  send_msg(MSG_INFO,"Entrez le mouvement");
+  send_msg(MSG_INFO,"Entrez le mouvement !");
   for(int i=0;i<5;i++){
     char key;
     if(i<4){
@@ -53,18 +52,18 @@ Move getMove(joueur joueur){
         key=(char)getKey();
         _move[i]=' ';
         output(_move,Neutral,joueur);
-        send_msg(MSG_INFO,"Entrez le mouvement");
+        send_msg(MSG_INFO,"Entrez le mouvement !");
 
         if(key==backspace){
           i=i-1==-1?0:i-1;
           _move[i]=' ';
           output(_move,Neutral,joueur);
-          send_msg(MSG_INFO,"Entrez le mouvement");
+          send_msg(MSG_INFO,"Entrez le mouvement !");
         }
       }while(verifInput(i%2,key));
       _move[i]=key;
       output(_move,Neutral,joueur);
-      send_msg(MSG_INFO,"Entrez le mouvement");
+      send_msg(MSG_INFO,"Entrez le mouvement !");
       if(i==1){
         int _case=plateau[56-(int)_move[1]][(int)_move[0]-97];
         if(_case==cv){
@@ -84,7 +83,7 @@ Move getMove(joueur joueur){
           i=2;
           _move[3]=' ';
           output(_move,Neutral,joueur);
-          send_msg(MSG_INFO,"Entrez le mouvement");
+          send_msg(MSG_INFO,"Entrez le mouvement !");
         }
       }while(key!=key_enter&&key!=backspace);
       if(key==key_enter){
