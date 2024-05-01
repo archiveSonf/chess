@@ -2,7 +2,7 @@
 #include "move.h"
 #include "case.h"
 #include "path.h"
-#
+#include "Endgame.h"
 
 #ifndef _ASSETS
 #define BD_GAMES "../dist/games.db.json"

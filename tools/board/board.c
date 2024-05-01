@@ -50,14 +50,14 @@ void runGame(GAME *game,Joueur *player1,Joueur *player2){
     Game.last_hit=NULL;
 
     int _plateau[8][8]={
-	    {ctb, ccb, cfb, cdb, crb, cfb, cv, ctb},
-	    {cpb, cpb, cpb, cv, cv, cpb, cpn, cpb},
 	    {cv, cv, cv, cv, cv, cv, cv, cv},
-	    {cv, ccn, cv, cv, cv, cv, cv, cv},
+	    {cpb, cfb, cpb, cv, ctn, cv, cv, cv},
+	    {cv, cv, cpb, crb, cv, cv, ccn, cv},
+	    {cv, cv, cpn, cv, cv, cv, cdb, cpb},
+	    {cv, cv, cv, cpn, cv, ccn, cv, cv},
 	    {cv, cv, cv, cv, cv, cv, cv, cv},
-	    {cv, cv, cv, cv, cv, cv, cv, cv},
-	    {cpn, cpn, cpn, cv, cv, cpn, cpb, cpn},
-	    {ctn, ccn, cfn, cdn, crn, cfn, ccn, ctn}};
+	    {cpn, cpn, cv, ctb, cv, cv, cv, cv},
+	    {cv, crn, ctn, cv, cv, cv, cv, cv}};
     memcpy(plateau,_plateau,sizeof(_plateau));
     memcpy(Game.plateau,plateau,sizeof(plateau));
   }else{

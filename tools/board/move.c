@@ -88,14 +88,11 @@ Move getMove(joueur joueur){
         }
       }while(key!=key_enter&&key!=backspace);
       if(key==key_enter){
-        //int _to=plateau[(int)_move[1]-49][(int)_move[0]-97];
-        //int _from=plateau[(int)_move[3]-49][(int)_move[2]-97];
-
+        
         int mvtV = coup_valide(56-(int)_move[1],(int)_move[0]-97,56-(int)_move[3],(int)_move[2]-97);
         int roi_warning=Leroi(56-(int)_move[1],(int)_move[0]-97,56-(int)_move[3],(int)_move[2]-97);
-        //CurserPos.row=25;
-        //CurserPos.col = 0;
-        //draw(1,"%d",metamorphose);
+        int checkmate_blanc = echec_et_mat_blanc(56-(int)_move[1],(int)_move[0]-97,56-(int)_move[3],(int)_move[2]-97);
+        int checkmate_noir = echec_et_mat_noir(56-(int)_move[1],(int)_move[0]-97,56-(int)_move[3],(int)_move[2]-97);
 
         if(!mvtV){
           output(_move,InValid,joueur);
@@ -105,9 +102,18 @@ Move getMove(joueur joueur){
           output(_move,InValid,joueur);
           i=2;
           send_msg(MSG_ERROR,"Votre roi est en danger !");
-        }else if(mvtV && !roi_warning){
+        }else if(mvtV && !roi_warning && !checkmate_blanc && !checkmate_noir){
           output(_move,Valid,joueur);
           send_msg(MSG_SUCCESS,"Mouvement valide");
+          mv=(Move){NULL,
+            {(int)_move[0]-97,56-(int)_move[1]},
+            {(int)_move[2]-97,56-(int)_move[3]}};
+          mv.string=malloc(4*sizeof(char));
+          strcpy(mv.string,_move);
+        }
+        else if(mvtV && !roi_warning && (checkmate_blanc || checkmate_noir)){
+          output(_move,Valid,joueur);
+          send_msg(MSG_SUCCESS,"ECHEC ET MAT");
           mv=(Move){NULL,
             {(int)_move[0]-97,56-(int)_move[1]},
             {(int)_move[2]-97,56-(int)_move[3]}};

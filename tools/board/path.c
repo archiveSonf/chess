@@ -7,8 +7,7 @@
 #define max_cases_jouables 28
 
 int nbre_cases_jouables=max_cases_jouables;
-int danger_blanc;
-int danger_noir;
+
 
 int** path_piece (int x_to, int y_to){
     
@@ -493,9 +492,12 @@ int Leroi (int x_to,int y_to,int x_from,int y_from){
 
 int Rn[2];
 int Rb[2];
-danger_blanc = 0;
-danger_noir = 0;
+int permut;
+int danger_blanc = 0;
+int danger_noir = 0;
 
+if(coup_valide(x_to,y_to,x_from,y_from)){
+permut = plateau[x_from][y_from];
 plateau[x_from][y_from] = plateau[x_to][y_to];
 plateau[x_to][y_to] = cv;
 
@@ -550,9 +552,9 @@ plateau[x_to][y_to] = cv;
             }
         }
 
-
     plateau[x_to][y_to] = plateau[x_from][y_from];
-    plateau[x_from][y_from] = cv;
+    plateau[x_from][y_from] = permut;
+}
 
     
 
